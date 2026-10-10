@@ -14,6 +14,6 @@ writeFileSync('docs/index.html',html);
 for (const file of ['style.css','app.js']) copyFileSync(file,`docs/${file}`);
 copyFileSync('assets/favicon.svg','docs/assets/favicon.svg');
 writeFileSync('docs/.nojekyll','');
-writeFileSync('docs/404.html','<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page not found — Jordan</title><link rel="stylesheet" href="/portfolio/style.css"><main class="wrap hero"><p class="eyebrow">404 / Page not found</p><h1>Let’s get back<br>to the work.</h1><p><a class="button" href="/portfolio/">Return to Jordan’s portfolio</a></p></main></html>');
+writeFileSync('docs/404.html','<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page not found — Jordan Jenkins</title><link rel="stylesheet" href="/portfolio/style.css"><main class="wrap hero"><p class="eyebrow">404 / Page not found</p><h1>Let’s get back<br>to the work.</h1><p><a class="button" href="/portfolio/">Return to Jordan Jenkins’s portfolio</a></p></main></html>');
 console.log(`Built portfolio with ${projects.length} projects.`);
 

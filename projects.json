@@ -1,11 +1,89 @@
 [
-  {"id":"ai-for-life","title":"AI For Life","category":"Websites","status":"Public website","summary":"Making practical AI easier to learn, one walkthrough at a time.","problem":"New AI users need a clear starting point, understandable terminology, and examples that connect tools to real work.","approach":"A student club resource hub brings together tool walkthroughs, business use cases, a searchable glossary, prompts, and a beginner learning roadmap.","skills":["HTML","CSS","JavaScript","GitHub Pages"],"demonstrates":"Organizing technical information into an approachable learning experience.","limit":"An educational resource; tool details need ongoing review as products change.","url":"https://thej1u.github.io/ai-for-life/","source":"https://github.com/TheJ1u/ai-for-life"},
-  {"id":"agency-crm","title":"AgencyCRM","category":"Business tools","status":"Private project","summary":"A connected workspace for insurance agency operations.","problem":"Client records, policies, follow-ups, and appointments can become disconnected across separate tools.","approach":"A full-stack application organizes clients, policies, a lead pipeline, tasks, calendars, and reporting around agency workflows.","skills":["React","TypeScript","Express","PostgreSQL"],"demonstrates":"Turning business workflows into connected interfaces and a relational data model.","limit":"Source is private. No public demo or production-readiness claim is presented."},
-  {"id":"insurance-website","title":"Insurance website","category":"Websites","status":"Private project","summary":"A web application for an insurance advisory business.","problem":"An advisory business needs an organized digital presence that visitors can navigate and understand.","approach":"A React and TypeScript website uses reusable interface components and structured routing.","skills":["React","TypeScript","TanStack","Tailwind CSS"],"demonstrates":"Building a business-facing web interface with reusable components.","limit":"Source is private. A public website address has not been added to this portfolio."},
-  {"id":"ai-apocalypse","title":"AI Apocalypse","category":"Games","status":"Private project","summary":"An idle simulation about growing an AI startup—and living with the consequences.","problem":"An idle game needs progression, meaningful decisions, and a simulation that works independently of its interface.","approach":"A TypeScript simulation engine powers a React interface with branching events, progression, and saved games. The project includes automated simulation tests.","skills":["React","TypeScript","Vite","Capacitor"],"demonstrates":"Separating game rules from presentation and testing complex state changes.","limit":"No public playable build or app-store release is linked here."},
-  {"id":"ai-team","title":"AI Team","category":"AI & automation","status":"Private project","summary":"An orchestration workspace for coordinating specialized AI agents.","problem":"Multiple AI agents need clear responsibilities, shared task context, and review checkpoints.","approach":"A command-driven workspace coordinates agent roles, project tasks, messages, file claims, and review handoffs through terminal sessions.","skills":["AI workflows","CLI tooling","tmux","WSL"],"demonstrates":"Designing coordination and review workflows for work across multiple agents.","limit":"A development tool, with private source and no public hosted demo."},
-  {"id":"mission-control","title":"AI Mission Control","category":"AI & automation","status":"Private project","summary":"A desktop window into an AI team's work.","problem":"Managing an agent workspace through terminals alone makes it harder to see activity in one place.","approach":"An Electron desktop interface observes the existing orchestration workspace and controls it through its command interface, with terminals and task visibility.","skills":["Electron","TypeScript","Vite","Desktop UI"],"demonstrates":"Building a desktop interface around an existing system without duplicating its state.","limit":"Requires the underlying local agent workspace; no public download is offered here."},
-  {"id":"options-research","title":"Options research lab","category":"Research","status":"Research project","summary":"A reproducible foundation for studying simulated options execution.","problem":"Research results are hard to trust without explicit costs, valid data, and reproducible experiment records.","approach":"A Python toolkit validates input data, replays simulated execution, records experiment metadata, and tests accounting and data integrity using synthetic fixtures.","skills":["Python","Data validation","Simulation","Automated tests"],"demonstrates":"Building auditable research infrastructure and documenting the limits of evidence.","limit":"No trading edge has been established. This is offline research, with no live-order code."},
-  {"id":"mass-mailer","title":"Mass Email Sender","category":"Business tools","status":"Local application","summary":"A desktop workflow for personalized spreadsheet-based email campaigns.","problem":"Repeated communication needs personalization, campaign tracking, and a clear review step before sending.","approach":"A desktop application organizes templates, spreadsheet imports, business-specific campaigns, previews, and scheduled sends.","skills":["Python","Desktop UI","Spreadsheets","Workflow automation"],"demonstrates":"Turning a repetitive business process into a guided, reviewable workflow.","limit":"A local application; client lists, messages, and account data are not part of this portfolio."},
-  {"id":"woodworking","title":"Woodworking showcase","category":"Websites","status":"In development","summary":"A product and storytelling website for handcrafted bookshelves.","problem":"A craft business needs a way to explain its story and present its products clearly.","approach":"A React website separates editable content from layout, with product, gallery, and story sections.","skills":["React","TypeScript","Tailwind CSS","Content design"],"demonstrates":"Structuring a marketing website so content can be maintained in one place.","limit":"Business details and photography remain to be completed before launch."}
+  {
+    "id": "ai-for-life",
+    "title": "AI For Life",
+    "category": "Websites",
+    "status": "Public website",
+    "summary": "Making practical AI easier to learn, one walkthrough at a time.",
+    "problem": "New AI users need a clear starting point, understandable terminology, and examples that connect tools to real work.",
+    "approach": "A student club resource hub brings together tool walkthroughs, business use cases, a searchable glossary, prompts, and a beginner learning roadmap.",
+    "skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "GitHub Pages"
+    ],
+    "demonstrates": "Organizing technical information into an approachable learning experience.",
+    "limit": "An educational resource; tool details need ongoing review as products change.",
+    "url": "https://thej1u.github.io/ai-for-life/",
+    "source": "https://github.com/TheJ1u/ai-for-life"
+  },
+  {
+    "id": "insurance-website",
+    "title": "Insurance website",
+    "category": "Websites",
+    "status": "Private project",
+    "summary": "A web application for an insurance advisory business.",
+    "problem": "An advisory business needs an organized digital presence that visitors can navigate and understand.",
+    "approach": "A React and TypeScript website uses reusable interface components and structured routing.",
+    "skills": [
+      "React",
+      "TypeScript",
+      "TanStack",
+      "Tailwind CSS"
+    ],
+    "demonstrates": "Building a business-facing web interface with reusable components.",
+    "limit": "Source is private. A public website address has not been added to this portfolio."
+  },
+  {
+    "id": "options-research",
+    "title": "Options research lab",
+    "category": "Research",
+    "status": "Research project",
+    "summary": "A reproducible foundation for studying simulated options execution.",
+    "problem": "Research results are hard to trust without explicit costs, valid data, and reproducible experiment records.",
+    "approach": "A Python toolkit validates input data, replays simulated execution, records experiment metadata, and tests accounting and data integrity using synthetic fixtures.",
+    "skills": [
+      "Python",
+      "Data validation",
+      "Simulation",
+      "Automated tests"
+    ],
+    "demonstrates": "Building auditable research infrastructure and documenting the limits of evidence.",
+    "limit": "No trading edge has been established. This is offline research, with no live-order code."
+  },
+  {
+    "id": "mass-mailer",
+    "title": "Mass Email Sender",
+    "category": "Business tools",
+    "status": "Local application",
+    "summary": "A desktop workflow for personalized spreadsheet-based email campaigns.",
+    "problem": "Repeated communication needs personalization, campaign tracking, and a clear review step before sending.",
+    "approach": "A desktop application organizes templates, spreadsheet imports, business-specific campaigns, previews, and scheduled sends.",
+    "skills": [
+      "Python",
+      "Desktop UI",
+      "Spreadsheets",
+      "Workflow automation"
+    ],
+    "demonstrates": "Turning a repetitive business process into a guided, reviewable workflow.",
+    "limit": "A local application; client lists, messages, and account data are not part of this portfolio."
+  },
+  {
+    "id": "woodworking",
+    "title": "Woodworking showcase",
+    "category": "Websites",
+    "status": "In development",
+    "summary": "A product and storytelling website for handcrafted bookshelves.",
+    "problem": "A craft business needs a way to explain its story and present its products clearly.",
+    "approach": "A React website separates editable content from layout, with product, gallery, and story sections.",
+    "skills": [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Content design"
+    ],
+    "demonstrates": "Structuring a marketing website so content can be maintained in one place.",
+    "limit": "Business details and photography remain to be completed before launch."
+  }
 ]

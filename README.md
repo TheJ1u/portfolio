@@ -1,8 +1,8 @@
-# Jordan's portfolio website
+# Jordan Jenkins's portfolio website
 
-A visual project portfolio covering practical AI, business applications, websites, games, and research. AI For Life is the featured project, with direct links to its website and source.
+A visual project portfolio covering practical AI, business applications, websites, and research. AI For Life is the featured project, with direct links to its website and source.
 
-**Portfolio address (once GitHub Pages is enabled): https://thej1u.github.io/portfolio/**
+[Visit the Jordan Jenkins project collection](https://thej1u.github.io/portfolio/)
 
 ## Update the site
 
@@ -21,4 +21,4 @@ GitHub Pages should deploy from the `main` branch, `/docs` folder. Other project
 
 ## Content scope
 
-Nine projects are included based on existing documentation. No user counts, revenue, performance results, certifications, or individual contribution claims have been invented. Work without a public demo is labeled accordingly.
+Five projects are included based on existing documentation. No user counts, revenue, performance results, certifications, or individual contribution claims have been invented. Work without a public demo is labeled accordingly.
