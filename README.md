@@ -1,28 +1,24 @@
-# Jordan's Portfolio
+# Jordan's portfolio website
 
-Information Systems student interested in AI, startups, and business analytics. I like turning new technology into something people can actually use.
+A visual project portfolio covering practical AI, business applications, websites, games, and research. AI For Life is the featured project, with direct links to its website and source.
 
-## Featured project: AI For Life
+**Portfolio address (once GitHub Pages is enabled): https://thej1u.github.io/portfolio/**
 
-A student club website that helps people new to AI explore practical tools and apply them to school and business projects.
+## Update the site
 
-[Visit the AI For Life website](https://thej1u.github.io/ai-for-life/) · [Explore the source code](https://github.com/TheJ1u/ai-for-life)
+1. Edit `projects.json` to add or update a project. Keep descriptions factual and do not include private data or credentials.
+2. Run `npm run build` to regenerate the published files in `docs/`.
+3. Run `npm test` before committing.
+4. Commit the source changes and generated `docs/` files, then push to `main`.
 
-### The problem it addresses
+No dependencies need to be installed. Use a current Node.js release.
 
-Getting started with AI means navigating unfamiliar tools, terminology, and possible use cases. AI For Life brings beginner resources together in one place for club members and other learners.
+`template.html` contains the page structure; `style.css` and `app.js` provide the responsive design and optional filtering. All project content remains readable without JavaScript. Private projects have high-level descriptions without links to inaccessible source repositories.
 
-### What visitors can do
+## Hosting
 
-- Follow tool walkthroughs and explore business use cases.
-- Find explanations in a searchable glossary.
-- Try reusable prompts and follow a beginner learning roadmap.
-- Explore member projects and contribute resources through GitHub.
+GitHub Pages should deploy from the `main` branch, `/docs` folder. Other project repositories do not need to be made public.
 
-### How it is built
+## Content scope
 
-The site uses HTML, CSS, and JavaScript, with hosting through GitHub Pages. Its static structure requires no framework build step and makes small content updates straightforward for contributors.
-
-## What I'm learning
-
-SQL, GitHub, Claude Code, and AI workflows.
+Nine projects are included based on existing documentation. No user counts, revenue, performance results, certifications, or individual contribution claims have been invented. Work without a public demo is labeled accordingly.
