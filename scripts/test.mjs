@@ -7,7 +7,8 @@ test('Every project has unique identity, evidence summary and an honest limitati
   for(const p of projects){for(const key of ['id','title','category','status','summary','problem','approach','demonstrates','limit'])assert.ok(p[key]?.trim(),`${p.id}: ${key}`);assert.ok(p.skills.length);}
 });
 test('Public links never point visitors to private project sources',()=>{
-  for(const p of projects){if(p.source)assert.equal(p.source,'https://github.com/TheJ1u/ai-for-life');if(p.url)assert.equal(new URL(p.url).protocol,'https:');}
+  const PUBLIC_SOURCES=['https://github.com/TheJ1u/ai-for-life','https://github.com/TheJ1u/text-from-sheet'];
+  for(const p of projects){if(p.source)assert.ok(PUBLIC_SOURCES.includes(p.source),`${p.id}: source must be a public repo`);if(p.url)assert.equal(new URL(p.url).protocol,'https:');if(p.url)assert.ok(p.source,`${p.id}: a website link needs its public source`);}
 });
 test('Built page has all projects, valid fragment targets and bundled assets',()=>{
   const html=readFileSync('docs/index.html','utf8');

@@ -19,6 +19,27 @@
     "source": "https://github.com/TheJ1u/ai-for-life"
   },
   {
+    "id": "text-from-sheet",
+    "title": "Text From Sheet",
+    "category": "Business tools",
+    "status": "Public · phone field test pending",
+    "summary": "Texts a spreadsheet of contacts from a person's own phone number: personalized, paced, and built with guardrails.",
+    "problem": "A non-technical family member needed to text a few hundred people who know him from his own number. Bulk-texting services start around $25 a month and require carrier registration; sending by hand is slow and error-prone.",
+    "approach": "A Python rules engine normalizes phone numbers and enforces consent, opt-out and do-not-text lists, duplicate removal, and sensitive-data blocking. An Android (Termux) sender paces texts about one a minute between 8am and 6pm after one typed approval, logs every send so it can resume, and runs from one-tap home-screen buttons, including a file picker for Excel lists. A no-install web app offers a review-each-text version. Extras: STOP-reply scanning, birthday automation with a one-time approval, and picture mode.",
+    "skills": [
+      "Python",
+      "JavaScript",
+      "Android (Termux)",
+      "Automated testing",
+      "Risk controls",
+      "Requirements gathering"
+    ],
+    "demonstrates": "Turning a real user's request into requirements, building controls against misuse and compliance mistakes, and verifying the result with 150+ automated tests and a build-versus-buy comparison.",
+    "limit": "Tests use simulated senders; not yet field-tested on a phone. Delivery is not confirmed, picture texts need one tap per person (an Android limit), and all sample data is fictional.",
+    "url": "https://thej1u.github.io/text-from-sheet/web/",
+    "source": "https://github.com/TheJ1u/text-from-sheet"
+  },
+  {
     "id": "insurance-website",
     "title": "Insurance website",
     "category": "Websites",
