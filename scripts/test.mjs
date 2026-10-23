@@ -16,6 +16,8 @@ test('Built page has all projects, valid fragment targets and bundled assets',()
   const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids.length,new Set(ids).size);
   for(const [,id]of html.matchAll(/href="#([^"]+)"/g))assert.ok(ids.includes(id),`Missing anchor ${id}`);
   for(const [,path]of html.matchAll(/(?:href|src)="([^"#:]+\.(?:css|js|svg))"/g))assert.ok(existsSync(`docs/${path}`),path);
-  assert.ok(!html.includes('<!-- PROJECTS -->'));
+  for(const [,src]of html.matchAll(/<img[^>]+src="([^"]+)"/g))assert.ok(existsSync(`docs/${src}`),`Missing image ${src}`);
+  for(const p of projects)assert.ok(new RegExp(`id="${p.id}"[\\s\\S]*?(?:<img|<svg class="art")`).test(html),`${p.id}: needs a screenshot or illustration`);
+  assert.ok(!html.includes('<!-- PROJECTS -->')&&!html.includes('<!-- FILTERS -->')&&!html.includes('<!-- COUNT_WORD -->'));
 });
 

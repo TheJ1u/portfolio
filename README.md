@@ -11,9 +11,13 @@ A visual project portfolio covering practical AI, business applications, website
 3. Run `npm test` before committing.
 4. Commit the source changes and generated `docs/` files, then push to `main`.
 
+### Add real screenshots
+
+Drop images into `assets/shots/` named `<project-id>-1.png`, `<project-id>-2.png`, and so on (the id is the `id` field in `projects.json`, for example `ai-for-life-1.png`). The build uses them automatically instead of the illustration, adds a numbered switcher when a project has more than one, and labels them "Screenshot". Add an optional `captions` list to the project in `projects.json` to describe each image. Only use screenshots with no client names, contact lists, or account data.
+
 No dependencies need to be installed. Use a current Node.js release.
 
-`template.html` contains the page structure; `style.css` and `app.js` provide the responsive design and optional filtering. All project content remains readable without JavaScript. Private projects have high-level descriptions without links to inaccessible source repositories.
+`template.html` contains the page structure; `style.css` and `app.js` provide the responsive design, category filters, search, the live preview stage, tabs, the screenshot switcher, and the light/dark toggle. All project content remains readable without JavaScript. Private projects have high-level descriptions without links to inaccessible source repositories.
 
 ## Hosting
 

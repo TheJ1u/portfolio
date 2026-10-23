@@ -57,7 +57,11 @@
     ],
     "demonstrates": "Designing a small data pipeline around a business question, applying least-privilege access and server-side validation, and finding and fixing a bug by building the backend twice (hand-built versus as code).",
     "limit": "A learning project built on fake data only; the analytics numbers come from 101 generated inquiries and are not market findings. The API has no authentication, and it is throttled.",
-    "source": "https://github.com/TheJ1u/aws-client-inquiry-pipeline"
+    "source": "https://github.com/TheJ1u/aws-client-inquiry-pipeline",
+    "captions": [
+      "The request-a-quote form, served over HTTPS (fake sample data).",
+      "Athena counting inquiries by product, on 101 synthetic records."
+    ]
   },
   {
     "id": "insurance-website",
