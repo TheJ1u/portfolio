@@ -40,6 +40,26 @@
     "source": "https://github.com/TheJ1u/text-from-sheet"
   },
   {
+    "id": "client-inquiry-pipeline",
+    "title": "Client Inquiry Pipeline",
+    "category": "Business tools",
+    "status": "Public source · working demo with fake data",
+    "summary": "A serverless AWS pipeline that saves quote-request inquiries as structured records, so questions like \"which products do people ask about most?\" are answered with SQL instead of by digging through an inbox.",
+    "problem": "A website form that only sends an email makes basic questions hard to answer: which products draw the most interest, and how many inquiries came in this week.",
+    "approach": "A static form on S3 and CloudFront posts to an API Gateway endpoint. A Python Lambda function validates each inquiry and saves it as a JSON file in a private S3 bucket, and Athena runs SQL over those files. The backend is also defined as code with AWS SAM, and 12 unit tests plus a template check run on every push through GitHub Actions.",
+    "skills": [
+      "AWS (S3, Lambda, API Gateway, Athena, CloudFront)",
+      "Python",
+      "SQL",
+      "Infrastructure as code (SAM)",
+      "Automated testing",
+      "GitHub Actions"
+    ],
+    "demonstrates": "Designing a small data pipeline around a business question, applying least-privilege access and server-side validation, and finding and fixing a bug by building the backend twice (hand-built versus as code).",
+    "limit": "A learning project built on fake data only; the analytics numbers come from 101 generated inquiries and are not market findings. The API has no authentication, and it is throttled.",
+    "source": "https://github.com/TheJ1u/aws-client-inquiry-pipeline"
+  },
+  {
     "id": "insurance-website",
     "title": "Insurance website",
     "category": "Websites",

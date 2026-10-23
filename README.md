@@ -21,4 +21,4 @@ GitHub Pages should deploy from the `main` branch, `/docs` folder. Other project
 
 ## Content scope
 
-Six projects are included based on existing documentation. No user counts, revenue, performance results, certifications, or individual contribution claims have been invented. Work without a public demo is labeled accordingly.
+Seven projects are included based on existing documentation. No user counts, revenue, performance results, certifications, or individual contribution claims have been invented. Work without a public demo is labeled accordingly.

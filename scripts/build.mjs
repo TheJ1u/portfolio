@@ -6,7 +6,7 @@ const cards = projects.map((p,i) => `<article class="project" id="${esc(p.id)}" 
  <p class="eyebrow">${esc(p.category)}</p><h3>${esc(p.title)}</h3><p class="summary">${esc(p.summary)}</p>
  <ul class="tags" aria-label="Technologies and skills">${p.skills.map(s=>`<li>${esc(s)}</li>`).join('')}</ul>
  <details><summary>Explore project <span aria-hidden="true">+</span></summary><div class="detail-body"><h4>The problem</h4><p>${esc(p.problem)}</p><h4>The approach</h4><p>${esc(p.approach)}</p><h4>What it demonstrates</h4><p>${esc(p.demonstrates)}</p><p class="project-note">${esc(p.limit)}</p></div></details>
- ${p.url?`<div class="project-links"><a href="${esc(p.url)}">Visit website <span aria-hidden="true">↗</span></a><a href="${esc(p.source)}">Source code <span aria-hidden="true">↗</span></a></div>`:''}
+ ${(p.url||p.source)?`<div class="project-links">${p.url?`<a href="${esc(p.url)}">Visit website <span aria-hidden="true">↗</span></a>`:''}${p.source?`<a href="${esc(p.source)}">Source code <span aria-hidden="true">↗</span></a>`:''}</div>`:''}
 </article>`).join('\n');
 let html=readFileSync('template.html','utf8').replace('<!-- PROJECTS -->',cards);
 mkdirSync('docs/assets',{recursive:true});
