@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync, existsSync } from 'node:fs';
 
 const projects = JSON.parse(readFileSync('projects.json', 'utf8'));
@@ -66,7 +67,10 @@ ${shotMarkup(p, i)}
 ${(p.url || p.source) ? `<p class="links">${p.url ? `<a class="button small" href="${esc(p.url)}">Visit site</a>` : ''}${p.source ? `<a class="${p.url ? 'text-link' : 'button small'}" href="${esc(p.source)}">View source</a>` : ''}</p>` : ''}
 </div></li>`).join('\n');
 
+const ver = f => createHash('sha1').update(readFileSync(f)).digest('hex').slice(0, 8);
 const html = readFileSync('template.html', 'utf8')
+  .replace('href="style.css"', `href="style.css?v=${ver('style.css')}"`)
+  .replace('src="app.js"', `src="app.js?v=${ver('app.js')}"`)
   .replace('<!-- PROJECTS -->', items)
   .replace('<!-- FILTERS -->', filters)
   .replace('<!-- COUNT_WORD -->', (words[projects.length] || String(projects.length)).toLowerCase());
