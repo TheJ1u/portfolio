@@ -25,7 +25,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* Header */
 .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; }
-.wordmark { font-weight: 700; letter-spacing: -0.01em; text-decoration: none; }
+.wordmark { font-weight: 700; letter-spacing: -0.01em; text-decoration: none; white-space: nowrap; }
 .bar nav { display: flex; align-items: center; gap: clamp(14px, 3vw, 28px); font-size: 0.95rem; font-weight: 500; }
 .bar nav a { text-decoration: none; color: var(--muted); }
 .bar nav a:hover { color: var(--ink); }
@@ -123,6 +123,10 @@ img, svg { display: block; max-width: 100%; }
   .stage .panel { padding: 0; animation: swap .22s ease both; }
   .stage .shots { margin-top: 0; }
   @keyframes swap { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+}
+@media (max-width: 640px) {
+  .bar { flex-wrap: wrap; row-gap: 10px; }
+  .bar nav { flex-wrap: wrap; gap: 8px 16px; }
 }
 @media (max-width: 899px) {
   .row { grid-template-columns: 1fr; }
