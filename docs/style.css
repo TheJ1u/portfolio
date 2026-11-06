@@ -213,3 +213,22 @@ footer .wordmark { color: var(--ink); }
 .card h3 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
 .card p { color: var(--muted); font-size: 0.97rem; }
 .case .slide figcaption { padding-right: 150px; }
+
+/* Screenshot viewer (opened by app.js). Always dark, with a large Close button. */
+.frame a.zoom { cursor: zoom-in; }
+html.lb-open { overflow: hidden; }
+.lightbox { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(6, 10, 20, .985); color: #e9edf6; }
+.lightbox[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+.lightbox::backdrop { background: rgba(6, 10, 20, .7); }
+.lightbox :focus-visible { outline: 3px solid #8ea2ff; outline-offset: 3px; }
+.lb-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px clamp(14px, 3vw, 28px); }
+.lb-count { font-size: .9rem; font-weight: 600; color: #a3adc0; font-variant-numeric: tabular-nums; }
+.lb-close { font: inherit; font-size: 1rem; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 20px; border: 0; border-radius: 999px; background: #ffffff; color: #0e1726; cursor: pointer; }
+.lb-close:hover { background: #dfe5ff; }
+.lb-stage { display: grid; place-items: center; min-height: 0; padding: 0 clamp(8px, 3vw, 32px); }
+.lb-img { max-width: 100%; max-height: calc(100vh - 170px); max-height: calc(100dvh - 170px); width: auto; height: auto; border-radius: 10px; box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .8); }
+.lb-bottom { display: grid; grid-template-columns: 48px minmax(0, 1fr) 48px; align-items: center; gap: 12px; padding: 14px clamp(14px, 3vw, 28px) 20px; }
+.lb-cap { text-align: center; font-size: .95rem; color: #c9d1e0; }
+.lb-prev, .lb-next { font: inherit; font-size: 1.2rem; width: 48px; height: 48px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .35); background: rgba(255, 255, 255, .1); color: #ffffff; cursor: pointer; }
+.lb-prev:hover, .lb-next:hover { background: rgba(255, 255, 255, .22); }
+.lb-prev { grid-column: 1; } .lb-cap { grid-column: 2; } .lb-next { grid-column: 3; }

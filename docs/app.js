@@ -43,6 +43,72 @@
   }, true);
   $$('.slides').forEach(updateCount);
 
+  /* Screenshot viewer: a full-screen dialog. The Close button, Esc, a click outside the picture and the
+     browser's Back button all close it, so a visitor is never stuck on a bare image file. */
+  const viewer = document.createElement('dialog');
+  viewer.className = 'lightbox';
+  viewer.setAttribute('aria-label', 'Screenshot viewer');
+  viewer.innerHTML = '<div class="lb-top"><span class="lb-count"></span><button type="button" class="lb-close">Close <span aria-hidden="true">✕</span></button></div>'
+    + '<div class="lb-stage"><img class="lb-img" alt=""></div>'
+    + '<div class="lb-bottom"><button type="button" class="lb-prev" aria-label="Previous screenshot">←</button><p class="lb-cap" aria-live="polite"></p><button type="button" class="lb-next" aria-label="Next screenshot">→</button></div>';
+  document.body.append(viewer);
+  const lbImg = $('.lb-img', viewer);
+  let lbItems = [], lbIndex = 0, lbOpener = null, lbPushed = false, lbIgnorePop = false;
+
+  function lbShow(i) {
+    lbIndex = (i + lbItems.length) % lbItems.length;
+    const item = lbItems[lbIndex];
+    lbImg.srcset = `${item.big} 1600w, ${item.full} 2560w`;
+    lbImg.sizes = '100vw';
+    lbImg.src = item.big;
+    lbImg.alt = item.alt;
+    $('.lb-cap', viewer).textContent = item.caption;
+    $('.lb-count', viewer).textContent = lbItems.length > 1 ? `${lbIndex + 1} / ${lbItems.length}` : '';
+    $('.lb-prev', viewer).hidden = $('.lb-next', viewer).hidden = lbItems.length < 2;
+  }
+  function lbOpen(link) {
+    const slides = $$('.slide', link.closest('.slides'));
+    lbItems = slides.map(slide => {
+      const a = $('a.zoom', slide);
+      return { full: a.getAttribute('href'), big: a.dataset.big, alt: $('img', slide).alt, caption: $('figcaption', slide)?.textContent || '' };
+    });
+    lbOpener = link;
+    lbShow(slides.indexOf(link.closest('.slide')));
+    viewer.showModal();
+    root.classList.add('lb-open');
+    // An extra history entry lets the phone's Back button close the viewer instead of leaving the page.
+    try { history.pushState({ viewer: true }, ''); lbPushed = true; } catch (e) { lbPushed = false; }
+  }
+  // Browsers drop focus after a history step, so put it back on the screenshot once the step is done.
+  const refocus = () => setTimeout(() => lbOpener?.focus({ preventScroll: true }), 0);
+  viewer.addEventListener('close', () => {
+    root.classList.remove('lb-open');
+    if (lbPushed) { lbPushed = false; lbIgnorePop = true; history.back(); } else refocus();
+  });
+  window.addEventListener('popstate', () => {
+    if (lbIgnorePop) { lbIgnorePop = false; refocus(); return; }
+    if (viewer.open) { lbPushed = false; viewer.close(); }
+  });
+  viewer.addEventListener('click', event => {
+    if (event.target.closest('.lb-close')) viewer.close();
+    else if (event.target.closest('.lb-prev')) lbShow(lbIndex - 1);
+    else if (event.target.closest('.lb-next')) lbShow(lbIndex + 1);
+    else if (!event.target.closest('.lb-img, .lb-cap, .lb-count')) viewer.close();
+  });
+  viewer.addEventListener('keydown', event => {
+    if (lbItems.length < 2 || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+    lbShow(lbIndex + (event.key === 'ArrowRight' ? 1 : -1));
+    event.preventDefault();
+  });
+  let touchX = null, touchY = 0;
+  viewer.addEventListener('touchstart', event => { touchX = event.touches[0].clientX; touchY = event.touches[0].clientY; }, { passive: true });
+  viewer.addEventListener('touchend', event => {
+    if (touchX === null || lbItems.length < 2) return;
+    const dx = event.changedTouches[0].clientX - touchX, dy = event.changedTouches[0].clientY - touchY;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) lbShow(lbIndex + (dx < 0 ? 1 : -1));
+    touchX = null;
+  });
+
   /* Panels: turn the three facets into tabs. Without JavaScript they all stay visible. */
   function enhance(panel) {
     const facets = $$('.facet', panel);
@@ -77,6 +143,8 @@
   document.addEventListener('click', event => {
     const tab = event.target.closest('.tab');
     if (tab) { selectTab(tab); return; }
+    const zoom = event.target.closest('a.zoom');
+    if (zoom && typeof viewer.showModal === 'function') { event.preventDefault(); lbOpen(zoom); return; }
     const arrow = event.target.closest('.slide-prev, .slide-next');
     if (arrow) go($('.slides', arrow.closest('.slideshow')), arrow.classList.contains('slide-next') ? 1 : -1);
   });

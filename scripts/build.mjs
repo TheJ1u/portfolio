@@ -14,8 +14,9 @@ const ver = f => createHash('sha1').update(readFileSync(f)).digest('hex').slice(
 function slideFiles(p, n) {
   const big = `assets/shots/${p.id}-${n}.webp`;
   const small = `assets/shots/${p.id}-${n}-800.webp`;
-  for (const f of [big, small]) if (!existsSync(f)) throw new Error(`${p.id}: missing ${f}`);
-  return { big, small };
+  const full = `assets/shots/${p.id}-${n}-2560.webp`;
+  for (const f of [big, small, full]) if (!existsSync(f)) throw new Error(`${p.id}: missing ${f}`);
+  return { big, small, full };
 }
 
 // A slideshow is a horizontal strip that scroll-snaps (works without JavaScript, swipes on phones).
@@ -23,8 +24,9 @@ function slideFiles(p, n) {
 function slideshow(p, { eager = false, sizes = '(min-width: 900px) 62vw, 100vw' } = {}) {
   const n = p.slides.length;
   const figures = p.slides.map((s, k) => {
-    const { big, small } = slideFiles(p, k + 1);
-    return `<div class="slide" role="group" aria-roledescription="slide" aria-label="${k + 1} of ${n}"><figure><div class="frame"><a href="${big}"><img src="${big}" srcset="${small} 800w, ${big} 1600w" sizes="${sizes}" width="1600" height="1000" alt="${esc(s.alt)}" loading="${eager && k === 0 ? 'eager' : 'lazy'}" decoding="async"><span class="sr-only"> (open full size)</span></a></div><figcaption>${esc(s.caption)}</figcaption></figure></div>`;
+    const { big, small, full } = slideFiles(p, k + 1);
+    // The link opens the in-page viewer (app.js); without JavaScript it opens the full-size image.
+    return `<div class="slide" role="group" aria-roledescription="slide" aria-label="${k + 1} of ${n}"><figure><div class="frame"><a href="${full}" data-big="${big}" class="zoom"><img src="${big}" srcset="${small} 800w, ${big} 1600w" sizes="${sizes}" width="1600" height="1000" alt="${esc(s.alt)}" loading="${eager && k === 0 ? 'eager' : 'lazy'}" decoding="async"><span class="sr-only"> (open larger view)</span></a></div><figcaption>${esc(s.caption)}</figcaption></figure></div>`;
   }).join('');
   const controls = n > 1 ? `<div class="slide-controls" hidden><button type="button" class="slide-prev" aria-label="Previous screenshot">&larr;</button><span class="slide-count">1 / ${n}</span><button type="button" class="slide-next" aria-label="Next screenshot">&rarr;</button></div>` : '';
   return `<div class="slideshow"><div class="slides" tabindex="0" role="region" aria-roledescription="carousel" aria-label="${esc(p.title)} screenshots, ${n} slides">${figures}</div>${controls}</div>`;

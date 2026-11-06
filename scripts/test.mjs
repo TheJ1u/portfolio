@@ -18,7 +18,7 @@ test('Every project explains itself: why, what I learned, my role, limits and sc
     assert.ok(p.slides?.length >= 2, `${p.id}: needs a slideshow (2+ slides)`);
     p.slides.forEach((s, k) => {
       assert.ok(s.alt?.trim().length > 20 && s.caption?.trim(), `${p.id} slide ${k + 1}: alt text and caption`);
-      for (const f of [`assets/shots/${p.id}-${k + 1}.webp`, `assets/shots/${p.id}-${k + 1}-800.webp`]) assert.ok(existsSync(f), `missing ${f}`);
+      for (const f of [`assets/shots/${p.id}-${k + 1}.webp`, `assets/shots/${p.id}-${k + 1}-800.webp`, `assets/shots/${p.id}-${k + 1}-2560.webp`]) assert.ok(existsSync(f), `missing ${f}`);
     });
   }
 });
