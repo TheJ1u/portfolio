@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thej1u.github.io/portfolio/sitemap.xml

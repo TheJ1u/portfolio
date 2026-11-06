@@ -1,0 +1,45 @@
+{
+  "id": "jenkinsir",
+  "file": "jenkinsir.html",
+  "title": "jenkinsir.com",
+  "subtitle": "A bilingual Medicare education website, built and run by a licensed agent.",
+  "description": "Case study: how Jordan Jenkins built and runs jenkinsir.com, a bilingual Medicare and ACA education website with about 1,900 pages, a rule-based assistant and automated release checks.",
+  "facts": [
+    { "label": "Role", "value": "Owner and builder" },
+    { "label": "Status", "value": "Live, actively maintained" },
+    { "label": "Stack", "value": "React, TypeScript, TanStack Start, Tailwind CSS, Vercel" },
+    { "label": "Built with", "value": "Lovable, then Claude Code" }
+  ],
+  "metrics": [
+    { "value": "~1,900", "label": "pages in English and Spanish" },
+    { "value": "687", "label": "articles, each in both languages" },
+    { "value": "238", "label": "assistant answers, each tested in both languages" },
+    { "value": "9", "label": "automated test scripts before each release" }
+  ],
+  "problem": [
+    "People turning 65 get buried in mailers and TV ads, and many pick the wrong plan or miss deadlines that cost them for years. Spanish-speaking families have even fewer clear sources.",
+    "I'm a licensed agent in Utah and Wyoming. I wanted one place where people could get straight, sourced answers before talking to anyone, without a marketing team behind it and inside strict rules: an educational site can't give personalized advice."
+  ],
+  "role": "I own the site: the requirements, the architecture and compliance decisions, the accuracy of every figure, and the checks before each release. I built it with AI coding tools, starting in Lovable and moving to Claude Code. The tools write much of the code; I decide what gets built, review it, and prove it works.",
+  "lanes": [
+    { "title": "A visit", "flow": true, "steps": ["Visitor, in English or Spanish", "Vercel renders the page on the server (TanStack Start)", "A tiny route file sets the address, title and language alternates", "The page loads only the data it needs"] },
+    { "title": "In the browser", "steps": ["Rule-based assistant with bilingual, typo-tolerant matching", "Accessible SVG charts with data-table twins", "Calculators, quizzes and plan guides"] },
+    { "title": "Leads and data", "flow": true, "steps": ["Forms post to the site's own API", "Spam check that never blocks a real person", "Lead filed in a Google Sheet, with an email alert"] },
+    { "title": "Automation", "steps": ["After each deploy, a GitHub Action tells Bing which pages changed", "Nine test scripts and a type check gate every release"] }
+  ],
+  "decisions": [
+    { "title": "An assistant that can't make things up", "body": "Every answer is pre-written and reviewed, so it can never invent a plan recommendation or decide someone's eligibility. Matching still feels natural: bilingual word stems, weighted keywords, any-order phrases and one-letter typo correction. A regression suite runs 82 realistic questions plus 476 self-checks in both languages." },
+    { "title": "Fast, with a large content library", "body": "Route files hold only configuration, and page components and large data files load per page. Each article carries its own search metadata, which removed about 420 KB of shared lookup tables from every page load." },
+    { "title": "Lead capture I own", "body": "Every form posts to the site's own API, which checks for spam and files the lead in a Google Sheet. The spam check fails open: only a definitely invalid token is rejected, so a real person is never turned away. Analytics count a lead only after the server confirms it, and a test fails the release if anything a visitor typed would reach analytics." },
+    { "title": "Compliance by design", "body": "Licensing is state by state. Nevada and Idaho pages switch every call button and contact to the agents licensed there, never claim my license, and hide plan tools that only apply in Utah and Wyoming. Reviews only appear on the pages of the agent they're about." },
+    { "title": "SEO in two languages", "body": "Every page has a canonical address, English and Spanish alternates, and structured data generated from what the page actually shows. Automated crawls check status codes, titles, one main heading per page, and that the structured data is valid." },
+    { "title": "Accessible for an older audience", "body": "Charts are built without a chart library, with a data-table twin for screen-reader and keyboard users. Text scales up on larger screens, dialogs trap and return focus, and reduced-motion settings are respected." }
+  ],
+  "mistakes": [
+    { "title": "Bulk publishing backfired", "body": "About 500 short posts dated within days of each other came before the site's demotion in Google's August 2026 spam update. I took 378 posts (756 pages counting their Spanish versions) out of Google's index, kept them available to Bing, and switched to fewer, longer posts on a steady schedule." },
+    { "title": "A popup crashed the moment it opened", "body": "The project had no type checking at first. The first type-check run found the bug, and type checking is now a release gate." },
+    { "title": "Two pages broke after a missing import shipped", "body": "The build passed, but the pages crashed in the browser. Now a browser sweep loads every page in the sitemap before release." },
+    { "title": "The whole site once shipped as one 2.3 MB file", "body": "One misplaced export defeated code splitting. The rule is now written in the project guide that every AI session reads first." }
+  ],
+  "closing": "The code stays private because the site is tied to my insurance work. I'm happy to walk through the architecture in an interview."
+}

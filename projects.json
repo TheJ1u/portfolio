@@ -1,52 +1,76 @@
 [
   {
-    "id": "ai-for-life",
-    "title": "AI For Life",
-    "category": "Websites",
-    "status": "Public website",
-    "summary": "Making practical AI easier to learn, one walkthrough at a time.",
-    "problem": "New AI users need a clear starting point, understandable terminology, and examples that connect tools to real work.",
-    "approach": "A student club resource hub brings together tool walkthroughs, business use cases, a searchable glossary, prompts, and a beginner learning roadmap.",
-    "skills": [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "GitHub Pages"
+    "id": "jenkinsir",
+    "title": "jenkinsir.com",
+    "kind": "Case study · Live website",
+    "status": "Live · code private",
+    "summary": "A bilingual Medicare and ACA education website I built and run as a licensed agent: about 1,900 pages in English and Spanish, an assistant that can't invent advice, and automated checks before every release.",
+    "role": "Owner and builder. I set the requirements, made the architecture and compliance decisions, checked the accuracy of every figure, and verified each release. Built with AI coding tools (Lovable to start, then Claude Code).",
+    "why": "People turning 65 get buried in mailers and TV ads. As a licensed agent in Utah and Wyoming, I wanted one place where families could get straight, sourced answers in English or Spanish before talking to anyone.",
+    "learned": [
+      "More isn't better. Publishing hundreds of short articles at once got the site demoted in Google's August 2026 spam update. I took 378 thin posts out of Google's index and now publish fewer, longer ones on a steady schedule.",
+      "In a regulated field, predictable beats clever. The assistant only gives pre-written, reviewed answers, so it can't invent a plan recommendation.",
+      "Tests are how I trust AI-written code. Bugs that reached production, like a popup that crashed on open, became automated checks. Nine now run before each release."
     ],
-    "demonstrates": "Organizing technical information into an approachable learning experience.",
-    "limit": "An educational resource; tool details need ongoing review as products change.",
-    "url": "https://thej1u.github.io/ai-for-life/",
-    "source": "https://github.com/TheJ1u/ai-for-life"
-  },
-  {
-    "id": "text-from-sheet",
-    "title": "Text From Sheet",
-    "category": "Business tools",
-    "status": "Public · phone field test pending",
-    "summary": "Texts a spreadsheet of contacts from a person's own phone number: personalized, paced, and built with guardrails.",
-    "problem": "A non-technical family member needed to text a few hundred people who know him from his own number. Bulk-texting services start around $25 a month and require carrier registration; sending by hand is slow and error-prone.",
-    "approach": "A Python rules engine normalizes phone numbers and enforces consent, opt-out and do-not-text lists, duplicate removal, and sensitive-data blocking. An Android (Termux) sender paces texts about one a minute between 8am and 6pm after one typed approval, logs every send so it can resume, and runs from one-tap home-screen buttons, including a file picker for Excel lists. A no-install web app offers a review-each-text version. Extras: STOP-reply scanning, birthday automation with a one-time approval, and picture mode.",
+    "approach": "TanStack Start (React and TypeScript), server-rendered on Vercel. Route files stay tiny and each page loads only the data it needs, so a large content library stays fast. Forms post to the site's own API, which filters spam without ever blocking a real person and files each lead in a Google Sheet. Pages for Nevada and Idaho route visitors to the agents licensed there.",
+    "demonstrates": "Running a real production system: performance at scale, SEO in two languages, accessibility for an older audience, analytics that never collect personal details, and compliance rules built into the design.",
+    "limit": "The code is private because the site is tied to my insurance work. It was built with AI coding tools, so my part is the product and compliance decisions, the accuracy of the content, and verifying each release.",
     "skills": [
-      "Python",
-      "JavaScript",
-      "Android (Termux)",
-      "Automated testing",
-      "Risk controls",
-      "Requirements gathering"
+      "React",
+      "TypeScript",
+      "TanStack Start",
+      "Tailwind CSS",
+      "Vercel",
+      "SEO in English and Spanish",
+      "Accessibility",
+      "Playwright",
+      "Google Sheets and Apps Script"
     ],
-    "demonstrates": "Turning a real user's request into requirements, building controls against misuse and compliance mistakes, and verifying the result with 150+ automated tests and a build-versus-buy comparison.",
-    "limit": "Tests use simulated senders; not yet field-tested on a phone. Delivery is not confirmed, picture texts need one tap per person (an Android limit), and all sample data is fictional.",
-    "url": "https://thej1u.github.io/text-from-sheet/web/",
-    "source": "https://github.com/TheJ1u/text-from-sheet"
+    "url": "https://jenkinsir.com",
+    "caseStudy": "jenkinsir.html",
+    "slides": [
+      {
+        "alt": "The Medicare 101 page: 'Medicare, Explained Simply', with a notice that the site is private and not affiliated with the government.",
+        "caption": "Plain-language guides. Every page says it is a private site, not the government."
+      },
+      {
+        "alt": "The assistant panel. Asked 'Can you recommend the best plan for me?', it explains it won't recommend a plan and offers a conversation with a person instead.",
+        "caption": "Asked to recommend a plan, the assistant declines. Every answer is pre-written."
+      },
+      {
+        "alt": "2026 Medicare cost cards and charts of the Part B premium from 2016 to 2026 and the income-based surcharge tiers.",
+        "caption": "2026 CMS figures as accessible charts, each with its source."
+      },
+      {
+        "alt": "The Spanish version of the Medicare 101 page, 'Medicare, Explicado de Forma Simple', with a Spanish help bar.",
+        "caption": "Every guide in Spanish too, at its own address."
+      },
+      {
+        "alt": "The Provo, Utah city page: 'Medicare Advisor, Provo, UT' with local details.",
+        "caption": "150+ local pages across four states."
+      },
+      {
+        "alt": "The site on a desktop screen and on a phone.",
+        "caption": "Designed for phones first."
+      }
+    ]
   },
   {
     "id": "client-inquiry-pipeline",
     "title": "Client Inquiry Pipeline",
-    "category": "Business tools",
-    "status": "Public source · working demo with fake data",
-    "summary": "A serverless AWS pipeline that saves quote-request inquiries as structured records, so questions like \"which products do people ask about most?\" are answered with SQL instead of by digging through an inbox.",
-    "problem": "A website form that only sends an email makes basic questions hard to answer: which products draw the most interest, and how many inquiries came in this week.",
+    "kind": "Data pipeline · AWS",
+    "status": "Working demo · fake data",
+    "summary": "A serverless AWS pipeline that saves quote requests as structured records, so questions like \"which products do people ask about most?\" are answered with SQL instead of by digging through an inbox.",
+    "role": "Designed and built it end to end: the architecture, the AWS setup (first by hand, then as code), the Lambda function, the SQL, the tests and the CI. Claude helped as a coding assistant.",
+    "why": "I wanted to learn AWS on a problem I know from insurance. A quote form that only sends an email can't answer simple questions, like which products people ask about most or how many inquiries came in this week.",
+    "learned": [
+      "Build it twice. Recreating the hand-built backend as code exposed a crash on malformed input. The fixed version returns a clean error.",
+      "CORS is a browser rule, not security. Real protection comes from least-privilege access: the function can write new records but can never read or delete them.",
+      "Store times in UTC and report in local time, or a day's numbers land on the wrong date."
+    ],
     "approach": "A static form on S3 and CloudFront posts to an API Gateway endpoint. A Python Lambda function validates each inquiry and saves it as a JSON file in a private S3 bucket, and Athena runs SQL over those files. The backend is also defined as code with AWS SAM, and 12 unit tests plus a template check run on every push through GitHub Actions.",
+    "demonstrates": "Designing a small data pipeline around a business question, applying least-privilege access and server-side validation, and finding a bug by building the backend twice.",
+    "limit": "A learning project on fake data only. The analytics come from 101 generated inquiries and are not market findings. The API has no authentication; it is throttled to 5 requests a second.",
     "skills": [
       "AWS (S3, Lambda, API Gateway, Athena, CloudFront)",
       "Python",
@@ -55,80 +79,111 @@
       "Automated testing",
       "GitHub Actions"
     ],
-    "demonstrates": "Designing a small data pipeline around a business question, applying least-privilege access and server-side validation, and finding and fixing a bug by building the backend twice (hand-built versus as code).",
-    "limit": "A learning project built on fake data only; the analytics numbers come from 101 generated inquiries and are not market findings. The API has no authentication, and it is throttled.",
     "source": "https://github.com/TheJ1u/aws-client-inquiry-pipeline",
-    "captions": [
-      "The request-a-quote form, served over HTTPS (fake sample data).",
-      "Athena counting inquiries by product, on 101 synthetic records."
+    "sourceIsPublic": false,
+    "slides": [
+      {
+        "alt": "The Request a Quote form filled in with sample data, an arrow through API Gateway and Lambda to S3, and the Athena console showing inquiries counted by product.",
+        "caption": "From the quote form to an answer in SQL (fake sample data)."
+      },
+      {
+        "alt": "Architecture diagram: the browser, CloudFront and S3 site, and API Gateway are public; the Lambda function, data bucket, Athena and results bucket are private, with write-only access for the function.",
+        "caption": "Public front door, private storage, least-privilege access."
+      },
+      {
+        "alt": "The Lambda handler code that returns a 400 error for invalid JSON, next to a terminal showing 12 passing tests and the CI checks.",
+        "caption": "The bug a second build exposed, and the 12 tests that guard it."
+      }
     ]
   },
   {
-    "id": "insurance-website",
-    "title": "Insurance website",
-    "category": "Websites",
-    "status": "Private project",
-    "summary": "A web application for an insurance advisory business.",
-    "problem": "An advisory business needs an organized digital presence that visitors can navigate and understand.",
-    "approach": "A React and TypeScript website uses reusable interface components and structured routing.",
-    "skills": [
-      "React",
-      "TypeScript",
-      "TanStack",
-      "Tailwind CSS"
+    "id": "text-from-sheet",
+    "title": "Text From Sheet",
+    "kind": "Automation · Python",
+    "status": "Public · not yet field-tested on a phone",
+    "summary": "Texts a spreadsheet of contacts from a person's own phone number: personalized, paced, and built with guardrails against mistakes.",
+    "role": "Gathered the requirements from the person who needed it, defined the safety rules, and verified the result with 153 automated tests. Claude helped as a coding assistant.",
+    "why": "A non-technical family member needed to text a few hundred people who know him, from his own number. Bulk-texting services need accounts, fees and carrier registration, and sending by hand is slow and error-prone.",
+    "learned": [
+      "Keep the rules in tested code and the screens thin. One rules engine powers both the web page and the Android sender.",
+      "Respect the platform's limits. A web page can't send texts by itself, so the simple version keeps a person in the loop, and the automatic sender is a separate, rate-limited tool that needs typed approval.",
+      "Privacy by design: there is no server, so the contact list never leaves the phone."
     ],
-    "demonstrates": "Building a business-facing web interface with reusable components.",
-    "limit": "Source is private. A public website address has not been added to this portfolio."
-  },
-  {
-    "id": "options-research",
-    "title": "Options research lab",
-    "category": "Research",
-    "status": "Research project",
-    "summary": "A reproducible foundation for studying simulated options execution.",
-    "problem": "Research results are hard to trust without explicit costs, valid data, and reproducible experiment records.",
-    "approach": "A Python toolkit validates input data, replays simulated execution, records experiment metadata, and tests accounting and data integrity using synthetic fixtures.",
+    "approach": "A Python rules engine normalizes phone numbers and enforces consent, opt-out and do-not-text lists, duplicate removal, and sensitive-data blocking. An Android (Termux) sender paces texts about one a minute between 8am and 6pm after one typed approval, logs every send so it can resume, and runs from one-tap home-screen buttons. A no-install web app offers a review-each-text version.",
+    "demonstrates": "Turning a real person's request into requirements, building controls against misuse and compliance mistakes, and proving the logic with automated tests.",
+    "limit": "Tests use simulated senders; it hasn't been field-tested on a phone yet. Delivery isn't confirmed, picture texts need one tap per person (an Android limit), and all sample data is fictional.",
     "skills": [
       "Python",
-      "Data validation",
-      "Simulation",
-      "Automated tests"
+      "JavaScript",
+      "Android (Termux)",
+      "Automated testing",
+      "Risk controls",
+      "Requirements gathering"
     ],
-    "demonstrates": "Building auditable research infrastructure and documenting the limits of evidence.",
-    "limit": "No trading edge has been established. This is offline research, with no live-order code."
+    "url": "https://thej1u.github.io/text-from-sheet/web/",
+    "source": "https://github.com/TheJ1u/text-from-sheet",
+    "slides": [
+      {
+        "alt": "Three phone screens: loading a contact list (10 ready, 5 skipped), writing one message with merge fields, and reviewing a personalized text for Ava Martinez.",
+        "caption": "Load a list, write one message, review and send each text."
+      },
+      {
+        "alt": "A phone screen warning 'This looks like a Social Security number', next to a terminal preview that explains why six rows were skipped.",
+        "caption": "It blocks sensitive data and explains every skipped row."
+      },
+      {
+        "alt": "The Python rules that detect Social Security, Medicare ID and card numbers, next to a terminal showing 132 Python tests and 21 JavaScript tests passing.",
+        "caption": "The rules engine and its 153 automated tests."
+      }
+    ]
   },
   {
-    "id": "mass-mailer",
-    "title": "Mass Email Sender",
-    "category": "Business tools",
-    "status": "Local application",
-    "summary": "A desktop workflow for personalized spreadsheet-based email campaigns.",
-    "problem": "Repeated communication needs personalization, campaign tracking, and a clear review step before sending.",
-    "approach": "A desktop application organizes templates, spreadsheet imports, business-specific campaigns, previews, and scheduled sends.",
-    "skills": [
-      "Python",
-      "Desktop UI",
-      "Spreadsheets",
-      "Workflow automation"
+    "id": "ai-for-life",
+    "title": "AI For Life",
+    "kind": "Community website",
+    "status": "Live · open source",
+    "summary": "The website for the AI For Life student club: beginner tool walkthroughs with business use cases, a searchable glossary, a prompt library, and a way for members to contribute and get credit.",
+    "role": "Founded the club's website and its contribution process, wrote the first tool guides, glossary and roadmap, and review and merge members' pull requests.",
+    "why": "Our club needed one place where beginners could start, and members needed a way to get visible, verifiable credit for what they contribute.",
+    "learned": [
+      "Design for people who've never used Git. Edits happen in the browser and arrive as pull requests I review.",
+      "Automate the fragile parts. One script rebuilds the search index and sitemap and checks every link, so a beginner's edit can't break the site.",
+      "Write instructions for AI helpers too. A CLAUDE.md file keeps members' AI assistants following the site's rules."
     ],
-    "demonstrates": "Turning a repetitive business process into a guided, reviewable workflow.",
-    "limit": "A local application; client lists, messages, and account data are not part of this portfolio."
-  },
-  {
-    "id": "woodworking",
-    "title": "Woodworking showcase",
-    "category": "Websites",
-    "status": "In development",
-    "summary": "A product and storytelling website for handcrafted bookshelves.",
-    "problem": "A craft business needs a way to explain its story and present its products clearly.",
-    "approach": "A React website separates editable content from layout, with product, gallery, and story sections.",
+    "approach": "Plain HTML, CSS and JavaScript published by GitHub Pages, with no build step so anyone can edit it. Site-wide search, an installable web app with offline support, and a contributors page that turns merged pull requests into résumé proof.",
+    "demonstrates": "Explaining technical topics to beginners, running an open contribution workflow, and keeping a community site easy to maintain.",
+    "limit": "An educational resource. AI tools change fast, so the guides need ongoing review.",
     "skills": [
-      "React",
-      "TypeScript",
-      "Tailwind CSS",
-      "Content design"
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "GitHub Pages",
+      "Technical writing",
+      "Open-source workflow"
     ],
-    "demonstrates": "Structuring a marketing website so content can be maintained in one place.",
-    "limit": "Business details and photography remain to be completed before launch."
+    "url": "https://thej1u.github.io/ai-for-life/",
+    "source": "https://github.com/TheJ1u/ai-for-life",
+    "slides": [
+      {
+        "alt": "The AI For Life home page: 'Learning AI together, one step at a time.'",
+        "caption": "A starting point for people new to AI."
+      },
+      {
+        "alt": "The GitHub tool guide, showing why it matters for business and the start of a full step-by-step walkthrough.",
+        "caption": "Each tool guide has a business use case and a full walkthrough."
+      },
+      {
+        "alt": "The glossary filtered to 'API', showing plain-English definitions.",
+        "caption": "A searchable glossary in plain English."
+      },
+      {
+        "alt": "The contributors page explaining how a merged pull request becomes résumé proof.",
+        "caption": "Contributions become verifiable résumé proof."
+      },
+      {
+        "alt": "The site on a desktop screen and on a phone.",
+        "caption": "Works on any screen and installs as an app."
+      }
+    ]
   }
 ]

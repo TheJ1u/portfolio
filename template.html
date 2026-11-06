@@ -2,57 +2,79 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Jordan Jenkins’s portfolio: business problems built into working software. AI, AWS, business tools, websites, and research.">
+  <title>Jordan Jenkins — Information Systems student building practical software</title>
+  <meta name="description" content="Jordan Jenkins is an Information Systems student at Utah Valley University and a licensed insurance agent who builds working software for business problems: a bilingual Medicare website, an AWS data pipeline, automation tools and a student AI club site.">
+  <link rel="canonical" href="%SITE%/">
   <meta name="theme-color" content="#f3f5f8">
+  <meta property="og:type" content="profile">
   <meta property="og:title" content="Jordan Jenkins — Business problems, built into working software">
-  <meta property="og:description" content="Projects in practical AI, AWS data pipelines, business tools, websites, and research.">
-  <meta property="og:type" content="website">
-  <title>Jordan Jenkins — Projects</title>
+  <meta property="og:description" content="Information Systems student and licensed insurance agent. Projects: a bilingual Medicare website, an AWS data pipeline, a safe texting tool and a student AI club site.">
+  <meta property="og:url" content="%SITE%/">
+  <meta property="og:image" content="%SITE%/assets/og-image.png">
+  <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jordan Jenkins, Information Systems and applied AI">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">%PERSON_JSONLD%</script>
   <script>try{var t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme='light'}</script>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap">
+  <link rel="preload" href="assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css"><script src="app.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar wrap">
   <a class="wordmark" href="#top" aria-label="Jordan Jenkins, back to top">Jordan Jenkins</a>
-  <nav aria-label="Main"><a href="#work">Work</a><a href="#about">About</a><a href="assets/Jordan_Jenkins_Resume.pdf">Résumé</a><a href="https://github.com/TheJ1u">GitHub</a><button type="button" id="theme-toggle" class="theme" aria-pressed="false"><span class="label">Dark</span> mode</button></nav>
+  <nav aria-label="Main"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a><button type="button" id="theme-toggle" class="theme" aria-pressed="false"><span class="label">Dark</span> mode</button></nav>
 </header>
 <main id="main">
   <section class="hero wrap" id="top" aria-labelledby="hero-heading">
-    <h1 id="hero-heading"><span class="line">Business problems,</span> <span class="line">built into working</span> <span class="line">software.</span></h1>
-    <p class="lede">I’m Jordan Jenkins, an Information Systems student exploring where AI, business, and software meet. Here are <!-- COUNT_WORD --> projects, from a data pipeline on AWS to a texting tool built for a family member.</p>
-    <p class="hero-actions"><a class="button" href="#work">See the work</a><a class="text-link" href="assets/Jordan_Jenkins_Resume.pdf">Résumé (PDF)</a></p>
+    <div class="hero-copy">
+      <p class="eyebrow">Information Systems · Applied AI · Provo, Utah</p>
+      <h1 id="hero-heading"><span class="line">Business problems,</span> <span class="line">built into working</span> <span class="line">software.</span></h1>
+      <p class="lede">I’m Jordan Jenkins, an Information Systems student at Utah Valley University and a licensed insurance agent in Utah and Wyoming. Below are <!-- COUNT_WORD --> projects, from a live 1,900-page website to an AWS data pipeline, each with why I built it and what I learned.</p>
+      <p class="hero-actions"><a class="button" href="#work">See the work</a><a class="text-link" href="#contact">Get in touch</a></p>
+    </div>
+    <a class="hero-shot" href="#jenkinsir"><img src="assets/shots/jenkinsir-1-800.webp" srcset="assets/shots/jenkinsir-1-800.webp 800w, assets/shots/jenkinsir-1.webp 1600w" sizes="(min-width: 1100px) 480px, 100vw" width="1600" height="1000" alt="The Medicare 101 page of jenkinsir.com, a bilingual Medicare education website." fetchpriority="high"><span>Featured: jenkinsir.com, live with about 1,900 pages in English and Spanish →</span></a>
   </section>
 
   <section class="work wrap" id="work" aria-labelledby="work-heading">
     <div class="work-head">
       <h2 id="work-heading">The work</h2>
-      <p>Choose a project to see what it looks like, the problem it solves, and where it falls short.</p>
+      <p>Choose a project to see what it looks like, why I built it, what I learned, and where it falls short.</p>
     </div>
-    <div class="controls" hidden>
-      <div class="chips" role="group" aria-label="Filter by category"><!-- FILTERS --></div>
-      <label class="search"><span>Search</span><input type="search" id="search" placeholder="Python, AWS, React…" autocomplete="off"></label>
-    </div>
-    <p id="result-count" class="result-count" aria-live="polite" hidden></p>
     <div class="work-grid">
       <ol class="list"><!-- PROJECTS --></ol>
       <div class="stage" aria-live="polite"></div>
     </div>
-    <p class="empty" hidden>No projects match that search. Clear it or choose All.</p>
   </section>
 
   <section class="about wrap" id="about" aria-labelledby="about-heading">
     <h2 id="about-heading">About</h2>
     <div class="about-copy">
-      <p>I’m an Information Systems student interested in AI, startups, and business analytics. I like turning new technology into something people can actually use.</p>
-      <p>These projects span learning resources, business workflows, desktop tools, and experiments. I’m continuing to learn SQL, GitHub, Claude Code, and AI workflows along the way.</p>
-      <p class="about-links"><a class="button" href="assets/Jordan_Jenkins_Resume.pdf">View résumé (PDF)</a><a class="text-link" href="assets/Jordan_Jenkins_Resume.pdf" download>Download résumé</a><a class="text-link" href="https://github.com/TheJ1u">GitHub profile</a></p>
+      <p>I’m studying Information Systems with an Applied AI emphasis at Utah Valley University (expected 2028), and I’m a licensed insurance agent in Utah and Wyoming. That mix shapes how I build: start from a real business problem, protect people’s data, and be honest about limits.</p>
+      <p>I build with AI coding tools, mainly Claude Code. I write the requirements, make the design and compliance calls, and check the work with automated tests before anything ships. Every project here lists its limits, because knowing what doesn’t work yet is part of the job.</p>
+      <dl class="facts">
+        <div><dt>Location</dt><dd>Provo, Utah</dd></div>
+        <div><dt>Languages</dt><dd>English and Spanish</dd></div>
+        <div><dt>Learning now</dt><dd>SQL, Git, and the Claude API</dd></div>
+        <div><dt>Certifications</dt><dd>Anthropic: Claude Code in Action, AI Fluency and more · AHIP Medicare training</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="contact wrap" id="contact" aria-labelledby="contact-heading">
+    <h2 id="contact-heading">Let’s talk</h2>
+    <div class="contact-copy">
+      <p>I’m looking for internships in information systems, data analytics and applied AI. Email is the fastest way to reach me.</p>
+      <p class="contact-links">
+        <a class="button" href="mailto:jordypauly01@gmail.com">jordypauly01@gmail.com</a>
+        <a class="text-link" href="https://www.linkedin.com/in/jordan-jenkinscrsg/">LinkedIn</a>
+        <a class="text-link" href="https://github.com/TheJ1u">GitHub</a>
+        <a class="text-link" href="assets/Jordan_Jenkins_Resume.pdf">Résumé (PDF)</a>
+      </p>
     </div>
   </section>
 </main>
-<footer class="wrap"><a class="wordmark" href="#top">Jordan Jenkins</a><p>A work in progress. Projects are added as they ship.</p><a class="text-link" href="#work">Back to the work</a></footer>
+<footer class="wrap"><a class="wordmark" href="#top">Jordan Jenkins</a><p>Built with plain HTML, CSS and JavaScript. <a class="text-link" href="https://github.com/TheJ1u/portfolio">Source on GitHub</a></p></footer>
 </body>
 </html>
