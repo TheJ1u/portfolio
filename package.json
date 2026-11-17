@@ -1,1 +1,12 @@
-{"name":"jordan-portfolio","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","test":"node --test scripts/test.mjs"}}
+{
+  "name": "jordan-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/build.mjs && node --test scripts/test.mjs",
+    "preview": "node scripts/build.mjs && node scripts/serve.mjs",
+    "discover": "node scripts/discover.mjs",
+    "check:links": "node scripts/check-links.mjs"
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "name": "Jordan Jenkins",
+  "email": "jordypauly01@gmail.com",
+  "location": "Provo, Utah",
+  "linkedin": "https://www.linkedin.com/in/jordan-jenkinscrsg/",
+  "github": "https://github.com/TheJ1u",
+  "resume": "assets/Jordan_Jenkins_Resume.pdf",
+  "approach": [
+    { "title": "Start from a real problem", "body": "Every project answers a need I ran into in insurance, in my family, or in my club. No tutorial clones." },
+    { "title": "Write the rules first", "body": "Requirements, privacy and compliance limits are written down before any code, so they shape the design." },
+    { "title": "Build with AI coding tools", "body": "Claude Code writes much of the code. I decide what gets built, review it, and make the design calls." },
+    { "title": "Prove it with tests", "body": "Automated checks run before anything ships. Bugs that reach production become new tests." },
+    { "title": "Publish the limits", "body": "Fake data is labeled fake and untested parts are labeled untested, on every project." }
+  ],
+  "skills": [
+    { "category": "Languages", "items": [
+      { "name": "Python", "evidence": ["client-inquiry-pipeline", "text-from-sheet"] },
+      { "name": "JavaScript", "evidence": ["text-from-sheet", "ai-for-life"] },
+      { "name": "TypeScript", "evidence": ["jenkinsir"] },
+      { "name": "SQL", "evidence": ["client-inquiry-pipeline"] },
+      { "name": "HTML and CSS", "evidence": ["ai-for-life"] }
+    ] },
+    { "category": "Frontend", "items": [
+      { "name": "React", "evidence": ["jenkinsir"] },
+      { "name": "TanStack Start", "evidence": ["jenkinsir"] },
+      { "name": "Tailwind CSS", "evidence": ["jenkinsir"] },
+      { "name": "Accessibility (WCAG)", "evidence": ["jenkinsir"] },
+      { "name": "SEO in English and Spanish", "evidence": ["jenkinsir"] }
+    ] },
+    { "category": "Backend and data", "items": [
+      { "name": "AWS Lambda and API Gateway", "evidence": ["client-inquiry-pipeline"] },
+      { "name": "S3 and Athena", "evidence": ["client-inquiry-pipeline"] },
+      { "name": "Server-side validation", "evidence": ["client-inquiry-pipeline"] },
+      { "name": "Google Sheets and Apps Script", "evidence": ["jenkinsir"] }
+    ] },
+    { "category": "AI and automation", "items": [
+      { "name": "AI-assisted development (Claude Code)", "evidence": ["jenkinsir", "client-inquiry-pipeline", "text-from-sheet"] },
+      { "name": "Rule-based assistant design", "evidence": ["jenkinsir"] },
+      { "name": "Automation with safety rules", "evidence": ["text-from-sheet"] },
+      { "name": "Instructions for AI helpers (CLAUDE.md)", "evidence": ["ai-for-life"] }
+    ] },
+    { "category": "Cloud and delivery", "items": [
+      { "name": "Infrastructure as code (AWS SAM)", "evidence": ["client-inquiry-pipeline"] },
+      { "name": "GitHub Actions", "evidence": ["client-inquiry-pipeline", "jenkinsir"] },
+      { "name": "Vercel", "evidence": ["jenkinsir"] },
+      { "name": "GitHub Pages", "evidence": ["ai-for-life", "text-from-sheet"] },
+      { "name": "CloudFront", "evidence": ["client-inquiry-pipeline"] }
+    ] },
+    { "category": "Testing and quality", "items": [
+      { "name": "Automated unit tests", "evidence": ["text-from-sheet", "client-inquiry-pipeline"] },
+      { "name": "Browser tests (Playwright)", "evidence": ["jenkinsir"] },
+      { "name": "Release gates and type checking", "evidence": ["jenkinsir"] },
+      { "name": "Least-privilege access", "evidence": ["client-inquiry-pipeline"] }
+    ] }
+  ],
+  "learning": [
+    "The Claude API (Building with the Claude API, in progress)",
+    "Claude Platform 101 (in progress)",
+    "Deeper SQL",
+    "Git and GitHub workflows"
+  ],
+  "business": [
+    "Licensed insurance agent in Utah and Wyoming",
+    "Medicare and ACA",
+    "Client presentations and plain-language teaching",
+    "English and Spanish"
+  ],
+  "experience": [
+    {
+      "role": "Insurance Agent",
+      "org": "Self-employed",
+      "dates": "Sep 2025 – Present",
+      "body": "Licensed in Utah and Wyoming. I explain coverage to clients in plain language and keep up with products and regulations. This work is where my software comes from: jenkinsir.com and the inquiry pipeline both started as problems I met here."
+    },
+    {
+      "role": "FSY Counselor",
+      "org": "The Church of Jesus Christ of Latter-day Saints",
+      "dates": "Jun 2026 – Jul 2026",
+      "body": "Led and mentored youth groups through week-long residential sessions: daily schedules and logistics for large groups, small-group discussions, and resolving conflicts within safety and program standards."
+    },
+    {
+      "role": "Missionary",
+      "org": "The Church of Jesus Christ of Latter-day Saints · Houston, Texas",
+      "dates": "Jul 2023 – Jun 2025",
+      "body": "Two years of full-time community outreach and service: planning each day, organizing service projects, and teaching one-on-one and in groups."
+    },
+    {
+      "role": "Golf Cart Manager",
+      "org": "The Oaks at Spanish Fork",
+      "dates": "Apr 2021 – Oct 2022",
+      "body": "Ran daily operations for the cart fleet: inspections, routine maintenance and customer service."
+    }
+  ],
+  "education": {
+    "degree": "B.S., Information Systems",
+    "detail": "Applied Artificial Intelligence emphasis",
+    "school": "Utah Valley University · Orem, Utah",
+    "dates": "Expected 2028"
+  },
+  "training": {
+    "completed": ["Claude 101", "Claude Code 101", "Claude Code in Action", "Introduction to Claude Cowork", "Introduction to Agent Skills", "AI Fluency: Framework & Foundations", "AI Fluency for Students", "AI Capabilities and Limitations"],
+    "other": ["AHIP Medicare training"]
+  }
+}

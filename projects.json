@@ -1,7 +1,10 @@
 [
   {
     "id": "jenkinsir",
+    "published": true,
     "title": "jenkinsir.com",
+    "short": "jenkinsir.com",
+    "featured": true,
     "kind": "Case study · Live website",
     "status": "Live · code private",
     "summary": "A bilingual Medicare and ACA education website I built and run as a licensed agent: about 1,900 pages in English and Spanish, an assistant that can't invent advice, and automated checks before every release.",
@@ -27,7 +30,20 @@
       "Google Sheets and Apps Script"
     ],
     "url": "https://jenkinsir.com",
-    "caseStudy": "jenkinsir.html",
+    "metrics": [
+      {
+        "value": "~1,900",
+        "label": "pages in English and Spanish"
+      },
+      {
+        "value": "238",
+        "label": "assistant answers, tested in both languages"
+      },
+      {
+        "value": "9",
+        "label": "automated checks before each release"
+      }
+    ],
     "slides": [
       {
         "alt": "The Medicare 101 page: 'Medicare, Explained Simply', with a notice that the site is private and not affiliated with the government.",
@@ -57,7 +73,9 @@
   },
   {
     "id": "client-inquiry-pipeline",
+    "published": true,
     "title": "Client Inquiry Pipeline",
+    "short": "Inquiry Pipeline",
     "kind": "Data pipeline · AWS",
     "status": "Working demo · fake data",
     "summary": "A serverless AWS pipeline that saves quote requests as structured records, so questions like \"which products do people ask about most?\" are answered with SQL instead of by digging through an inbox.",
@@ -81,6 +99,28 @@
     ],
     "source": "https://github.com/TheJ1u/aws-client-inquiry-pipeline",
     "sourceIsPublic": false,
+    "metrics": [
+      {
+        "value": "12",
+        "label": "unit tests, run by CI on every push"
+      },
+      {
+        "value": "5",
+        "label": "AWS services: S3, Lambda, API Gateway, Athena, CloudFront"
+      },
+      {
+        "value": "101",
+        "label": "generated sample inquiries (fake data)"
+      }
+    ],
+    "flow": [
+      "Static quote form on S3 and CloudFront",
+      "API Gateway endpoint, throttled",
+      "Python Lambda validates the inquiry",
+      "JSON record in a private S3 bucket",
+      "Athena answers questions in SQL"
+    ],
+    "next": "Add authentication to the API. Today it is only throttled.",
     "slides": [
       {
         "alt": "The Request a Quote form filled in with sample data, an arrow through API Gateway and Lambda to S3, and the Athena console showing inquiries counted by product.",
@@ -98,7 +138,9 @@
   },
   {
     "id": "text-from-sheet",
+    "published": true,
     "title": "Text From Sheet",
+    "short": "Text From Sheet",
     "kind": "Automation · Python",
     "status": "Public · not yet field-tested on a phone",
     "summary": "Texts a spreadsheet of contacts from a person's own phone number: personalized, paced, and built with guardrails against mistakes.",
@@ -122,6 +164,28 @@
     ],
     "url": "https://thej1u.github.io/text-from-sheet/web/",
     "source": "https://github.com/TheJ1u/text-from-sheet",
+    "metrics": [
+      {
+        "value": "153",
+        "label": "automated tests (132 Python, 21 JavaScript)"
+      },
+      {
+        "value": "0",
+        "label": "servers: the contact list stays on the phone"
+      },
+      {
+        "value": "1 / min",
+        "label": "paced sending, 8am to 6pm only"
+      }
+    ],
+    "flow": [
+      "Contact list (CSV)",
+      "Rules engine: numbers, consent, opt-outs, duplicates, sensitive data",
+      "Preview that explains every skipped row",
+      "One typed approval",
+      "Paced sending with a log, so it can resume"
+    ],
+    "next": "Field-test it on a physical phone, starting with the small real-number test in the setup guide.",
     "slides": [
       {
         "alt": "Three phone screens: loading a contact list (10 ready, 5 skipped), writing one message with merge fields, and reviewing a personalized text for Ava Martinez.",
@@ -139,7 +203,9 @@
   },
   {
     "id": "ai-for-life",
+    "published": true,
     "title": "AI For Life",
+    "short": "AI For Life",
     "kind": "Community website",
     "status": "Live · open source",
     "summary": "The website for the AI For Life student club: beginner tool walkthroughs with business use cases, a searchable glossary, a prompt library, and a way for members to contribute and get credit.",
@@ -163,6 +229,28 @@
     ],
     "url": "https://thej1u.github.io/ai-for-life/",
     "source": "https://github.com/TheJ1u/ai-for-life",
+    "metrics": [
+      {
+        "value": "150+",
+        "label": "glossary terms in plain English"
+      },
+      {
+        "value": "8",
+        "label": "tool guides with full walkthroughs"
+      },
+      {
+        "value": "0",
+        "label": "build steps: anyone can edit a page"
+      }
+    ],
+    "flow": [
+      "A member edits a page in the browser",
+      "The edit arrives as a pull request",
+      "I review and merge it",
+      "One script rebuilds search and the sitemap and checks every link",
+      "GitHub Pages publishes the site"
+    ],
+    "next": "Keep the tool guides current. AI tools change fast, so each guide needs a regular review.",
     "slides": [
       {
         "alt": "The AI For Life home page: 'Learning AI together, one step at a time.'",

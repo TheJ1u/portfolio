@@ -6,18 +6,102 @@
 
   /* Theme: follows the visitor's system setting until they pick one. */
   const toggle = $('#theme-toggle');
+  const themeColor = $('meta[name="theme-color"]');
   function applyTheme(theme) {
     root.dataset.theme = theme;
-    toggle.setAttribute('aria-pressed', String(theme === 'dark'));
-    $('.label', toggle).textContent = theme === 'dark' ? 'Light' : 'Dark';
+    const next = theme === 'dark' ? 'light' : 'dark';
+    if (toggle) $('.sr-only', toggle).textContent = `Switch to ${next} theme`;
+    if (themeColor) themeColor.content = theme === 'dark' ? '#090b10' : '#f5f6f8';
   }
   if (toggle) {
+    toggle.hidden = false;
     toggle.addEventListener('click', () => {
       const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
       applyTheme(next);
       try { localStorage.setItem('theme', next); } catch (e) { /* storage unavailable */ }
     });
-    applyTheme(root.dataset.theme || 'light');
+  }
+  applyTheme(root.dataset.theme === 'light' ? 'light' : 'dark');
+
+  /* Header: a hairline appears once the page scrolls. */
+  const bar = $('.bar');
+  if (bar) {
+    const onScroll = () => bar.classList.toggle('scrolled', scrollY > 8);
+    // No initial call: reading scrollY during load forces an early layout, and a restored scroll position fires this anyway.
+    addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  /* Mark the section being read in the navigation (home page) and the table of contents (case studies). */
+  function spy(links) {
+    const targets = links.map(a => document.getElementById(a.hash.slice(1))).filter(Boolean);
+    if (!targets.length || !('IntersectionObserver' in window)) return;
+    const visible = new Set();
+    const watch = new IntersectionObserver(entries => {
+      for (const entry of entries) { if (entry.isIntersecting) visible.add(entry.target); else visible.delete(entry.target); }
+      const current = targets.find(t => visible.has(t));
+      links.forEach(a => { if (current && a.hash === `#${current.id}`) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    targets.forEach(t => watch.observe(t));
+  }
+  spy($$('.bar nav a').filter(a => a.pathname === location.pathname && a.hash));
+  spy($$('.toc a'));
+
+  /* Copy the email address. The button only appears when the browser can do it. */
+  const copy = $('.copy');
+  if (copy && navigator.clipboard) {
+    copy.hidden = false;
+    copy.addEventListener('click', async () => {
+      const note = $('.copy-status');
+      try { await navigator.clipboard.writeText(copy.dataset.copy); note.textContent = 'Copied'; }
+      catch (e) { note.textContent = 'Copy failed. Select the address instead.'; }
+      setTimeout(() => { note.textContent = ''; }, 2500);
+    });
+  }
+
+  /* Screenshot deck (home hero): a 3D stack of real project screenshots.
+     Without JavaScript the stack is static and the front card is a link. */
+  const deck = $('[data-deck]');
+  if (deck) {
+    const cards = $$('.deck-card', deck);
+    const buttons = $$('.deck-nav button', deck);
+    const stack = $('.deck-cards', deck);
+    const bringToFront = index => {
+      cards.forEach((card, i) => {
+        const position = (i - index + cards.length) % cards.length;
+        card.style.setProperty('--p', position);
+        // Cards behind the front one stay out of the tab order; the buttons below reach them.
+        $('a', card).tabIndex = position === 0 ? 0 : -1;
+      });
+      buttons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
+    };
+    $('.deck-nav', deck).hidden = false;
+    buttons.forEach((button, i) => button.addEventListener('click', () => bringToFront(i)));
+    cards.forEach((card, i) => $('a', card).addEventListener('click', event => {
+      // Clicking a card that is behind the front one brings it forward instead of leaving the page.
+      if (card.style.getPropertyValue('--p').trim() !== '0') { event.preventDefault(); bringToFront(i); }
+    }));
+    bringToFront(0);
+
+    // Pointer tilt: mouse only, never under reduced motion, one update per frame.
+    const fine = matchMedia('(hover: hover) and (pointer: fine)');
+    let frame = 0;
+    deck.addEventListener('pointermove', event => {
+      if (!fine.matches || reduceMotion.matches || frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        const box = deck.getBoundingClientRect();
+        const x = (event.clientX - box.left) / box.width - 0.5;
+        const y = (event.clientY - box.top) / box.height - 0.5;
+        deck.classList.add('tilting');
+        stack.style.setProperty('--ry', `${(-9 + x * 14).toFixed(2)}deg`);
+        stack.style.setProperty('--rx', `${(4 - y * 10).toFixed(2)}deg`);
+      });
+    });
+    deck.addEventListener('pointerleave', () => {
+      deck.classList.remove('tilting');
+      stack.style.removeProperty('--ry');
+      stack.style.removeProperty('--rx');
+    });
   }
 
   /* Slideshows: the strip scroll-snaps on its own (and swipes on phones); these add buttons and a counter. */
@@ -37,11 +121,12 @@
     const target = Math.min(strip.children.length - 1, Math.max(0, slideIndex(strip) + step));
     strip.scrollTo({ left: target * strip.clientWidth, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
   }
-  // Scroll events don't bubble, so listen in the capture phase for every strip, including cloned ones.
+  // Scroll events don't bubble, so listen in the capture phase for every strip.
   document.addEventListener('scroll', event => {
     if (event.target instanceof Element && event.target.classList.contains('slides')) updateCount(event.target);
   }, true);
   $$('.slides').forEach(updateCount);
+  if (!$('a.zoom')) return;
 
   /* Screenshot viewer: a full-screen dialog. The Close button, Esc, a click outside the picture and the
      browser's Back button all close it, so a visitor is never stuck on a bare image file. */
@@ -109,126 +194,10 @@
     touchX = null;
   });
 
-  /* Panels: turn the three facets into tabs. Without JavaScript they all stay visible. */
-  function enhance(panel) {
-    const facets = $$('.facet', panel);
-    if (facets.length < 2) return;
-    const list = document.createElement('div');
-    list.className = 'tabs';
-    list.setAttribute('role', 'tablist');
-    list.setAttribute('aria-label', 'Project details');
-    facets.forEach((facet, i) => {
-      const tab = document.createElement('button');
-      tab.type = 'button';
-      tab.className = 'tab';
-      tab.setAttribute('role', 'tab');
-      tab.setAttribute('aria-selected', String(i === 0));
-      tab.tabIndex = i === 0 ? 0 : -1;
-      tab.dataset.facet = facet.dataset.facet;
-      tab.textContent = facet.dataset.facet;
-      list.append(tab);
-      facet.setAttribute('role', 'tabpanel');
-      facet.hidden = i !== 0;
-    });
-    facets[0].before(list);
-  }
-  $$('.panel').forEach(enhance);
-
-  function selectTab(tab) {
-    const panel = tab.closest('.panel');
-    $$('.tab', panel).forEach(item => { const on = item === tab; item.setAttribute('aria-selected', String(on)); item.tabIndex = on ? 0 : -1; });
-    $$('.facet', panel).forEach(facet => { facet.hidden = facet.dataset.facet !== tab.dataset.facet; });
-  }
-
   document.addEventListener('click', event => {
-    const tab = event.target.closest('.tab');
-    if (tab) { selectTab(tab); return; }
     const zoom = event.target.closest('a.zoom');
     if (zoom && typeof viewer.showModal === 'function') { event.preventDefault(); lbOpen(zoom); return; }
     const arrow = event.target.closest('.slide-prev, .slide-next');
     if (arrow) go($('.slides', arrow.closest('.slideshow')), arrow.classList.contains('slide-next') ? 1 : -1);
   });
-  document.addEventListener('keydown', event => {
-    const tab = event.target.closest?.('.tab');
-    if (!tab || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
-    const tabs = $$('.tab', tab.closest('.panel'));
-    const next = tabs[(tabs.indexOf(tab) + (event.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
-    selectTab(next);
-    next.focus();
-    event.preventDefault();
-  });
-
-  /* Project index: a list beside a preview stage on wide screens, expandable rows on narrow ones. */
-  const grid = $('.work-grid');
-  if (!grid) return;
-  const stage = $('.stage');
-  const items = $$('.item');
-  const wide = matchMedia('(min-width: 900px)');
-  let current = null;
-  grid.classList.add('has-stage');
-
-  function renderStage(item) {
-    const copy = $('.panel', item).cloneNode(true);
-    copy.removeAttribute('id');
-    stage.replaceChildren(copy);
-    $$('.slides', copy).forEach(updateCount);
-  }
-
-  function select(item, { toggleOpen = false } = {}) {
-    if (wide.matches) {
-      current = item;
-      items.forEach(other => {
-        const on = other === item;
-        other.classList.toggle('is-current', on);
-        const row = $('.row', other);
-        row.removeAttribute('aria-expanded');
-        if (on) row.setAttribute('aria-current', 'true'); else row.removeAttribute('aria-current');
-      });
-      renderStage(item);
-    } else {
-      const open = toggleOpen ? !item.classList.contains('open') : true;
-      item.classList.toggle('open', open);
-      const row = $('.row', item);
-      row.removeAttribute('aria-current');
-      row.setAttribute('aria-expanded', String(open));
-      if (open) $$('.slides', item).forEach(updateCount);
-    }
-  }
-
-  function syncMode() {
-    items.forEach(item => {
-      const row = $('.row', item);
-      row.removeAttribute('aria-current');
-      row.setAttribute('aria-expanded', String(item.classList.contains('open')));
-    });
-    if (wide.matches) select(current || items[0]);
-  }
-
-  items.forEach(item => {
-    const row = $('.row', item);
-    row.addEventListener('click', () => {
-      select(item, { toggleOpen: true });
-      try { history.replaceState(null, '', `#${item.id}`); } catch (e) { /* ignore */ }
-    });
-    row.addEventListener('keydown', event => {
-      if (!wide.matches || !['ArrowDown', 'ArrowUp'].includes(event.key)) return;
-      const next = items[items.indexOf(item) + (event.key === 'ArrowDown' ? 1 : -1)];
-      if (!next) return;
-      select(next);
-      $('.row', next).focus();
-      event.preventDefault();
-    });
-  });
-
-  function openFromHash() {
-    const item = items.find(other => other.id === location.hash.slice(1));
-    if (!item) return;
-    select(item);
-    item.scrollIntoView({ block: 'start' });
-  }
-
-  wide.addEventListener('change', syncMode);
-  window.addEventListener('hashchange', openFromHash);
-  syncMode();
-  openFromHash();
 })();

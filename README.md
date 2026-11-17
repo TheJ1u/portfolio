@@ -1,45 +1,64 @@
 # Jordan Jenkins: portfolio
 
-The source for [thej1u.github.io/portfolio](https://thej1u.github.io/portfolio/): four projects, each with a screenshot slideshow, why I built it, what I learned, and its limits, plus a full case study of [jenkinsir.com](https://jenkinsir.com).
+The source for [thej1u.github.io/portfolio](https://thej1u.github.io/portfolio/): a home page built for a 30-second read, plus a full case study page for every project (the problem, my role, how it works, what I learned, the limits and what I'd do next).
 
-| Lighthouse (2026-11-06) | Performance | Accessibility | Best practices | SEO |
+| Lighthouse 12 (2026-11-16, local build) | Performance | Accessibility | Best practices | SEO |
 | --- | --- | --- | --- | --- |
-| Home page, mobile and desktop | 100 | 100 | 100 | 100 |
-| Case study, mobile and desktop | 100 | 100 | 100 | 100 |
-
-An automated accessibility scan (axe-core, WCAG 2.1 AA) finds no violations in light or dark mode at desktop, phone and 320 px widths.
+| Home page, desktop | 100 | 100 | 100 | 100 |
+| Home page, mobile | 99 | 100 | 100 | 100 |
+| Case study (jenkinsir.com), desktop | 100 | 100 | 100 | 100 |
+| Case study (jenkinsir.com), mobile | 97 | 100 | 100 | 100 |
 
 ## How it's built
 
-Plain HTML, CSS and JavaScript with a tiny Node build script. No framework and no dependencies to install.
+Plain HTML, CSS and JavaScript with a small Node build script. No framework and nothing to install.
 
 ```
-projects.json           every project: summary, role, why I built it, what I learned, limits, slides
-case-studies/*.json     long-form case studies (one page each)
+projects.json           every project: summary, role, why, lessons, limits, numbers, slides, "published" flag
+site.json               profile: skills (each with the project that proves it), experience, education
+case-studies/*.json     optional extra depth for a project (decisions, mistakes, architecture lanes)
 template.html           home page layout
 case-study.html         case study page layout
-style.css, app.js       design, light/dark themes, slideshows, tabs, project index
-assets/shots/           screenshots: <project-id>-<n>.webp (1600 px) and <project-id>-<n>-800.webp
-assets/fonts/           Schibsted Grotesk, hosted with the site (SIL Open Font License, see OFL.txt)
+style.css, app.js       design, dark/light themes, 3D screenshot deck, slideshows, screenshot viewer
+assets/shots/           screenshots: <id>-<n>.webp (1600 px), <id>-<n>-800.webp, <id>-<n>-2560.webp
 scripts/build.mjs       renders docs/ (the published site), sitemap.xml and robots.txt
-scripts/test.mjs        checks content, links, images and accessibility basics
+scripts/test.mjs        content, privacy and accessibility checks
+scripts/discover.mjs    finds new repositories and problems; writes a private report
+scripts/check-links.mjs checks every external link without signing in
+scripts/serve.mjs       local preview server
 ```
 
 Design choices:
-- **Works without JavaScript.** Slideshows are scroll-snapping strips, so they swipe on phones and scroll with a trackpad or keyboard; JavaScript only adds the arrow buttons and the counter.
-- **Fast.** No web-font request to Google, responsive WebP screenshots at two sizes, images below the fold load lazily.
-- **Honest by test.** `npm test` fails if a project is missing why/learned/limits, if a slide has no alt text, if a link points to a private repository, or if jenkinsir.com is ever described as a business.
+- **Works without JavaScript and without motion.** Every page is complete as plain HTML. JavaScript adds the deck tilt, slideshow buttons and scroll reveals; `prefers-reduced-motion` turns all animation off.
+- **3D without a 3D library.** The hero deck is CSS transforms on real screenshots. A WebGL library such as Three.js would add roughly 150 KB of JavaScript for decoration, which costs load time on phones.
+- **Fast.** One self-hosted font, responsive WebP screenshots, lazy loading below the fold, no third-party requests.
+- **Honest by test.** `npm test` fails if a project is missing its lessons or limits, if a skill has no project behind it, if a link points to a repository that isn't confirmed public, or if an unpublished project leaks into the built site.
 
-## Update the site
+## Commands
 
-Requires a current Node.js. Nothing to install.
+```
+npm run preview       build, then serve at http://localhost:4173
+npm test              build, then run all checks
+npm run discover      look for new or changed repositories (writes .private/, changes nothing)
+npm run check:links   check every external link over the network
+```
 
-1. Edit `projects.json` (or a file in `case-studies/`). Keep every claim true and checkable.
-2. Add screenshots as `assets/shots/<id>-<n>.webp` and `<id>-<n>-800.webp` (16:10, 1600×1000 and 800×500), with one `slides` entry (alt text + caption) per image.
-3. Run `npm run build`, then `npm test`.
-4. Commit the source changes and the regenerated `docs/` folder, then push to `main`.
+## Add a project (approval-based)
 
-**When a private repository becomes public:** add its URL to `PUBLIC_SOURCES` in `scripts/test.mjs` and remove `"sourceIsPublic": false` from that project in `projects.json`. The "View source" link then appears.
+Nothing reaches the site unless its entry in `projects.json` has `"published": true`.
+
+1. Run `npm run discover`. It writes `.private/discovery.md` (ranked candidates, repositories that changed visibility, stale projects) and a draft for each strong candidate in `.private/drafts/`.
+2. Pick one. In its draft, replace every `[bracketed]` placeholder with something true and checkable. Decide what is safe to disclose if the repository is private.
+3. Add screenshots as `assets/shots/<id>-<n>.webp` (1600×1000), `<id>-<n>-800.webp` (800×500) and `<id>-<n>-2560.webp`, with one `slides` entry (alt text and caption) per image.
+4. Copy the finished entry into `projects.json` and set `"published": true`. To show a skill on the home page, add the project's id as evidence in `site.json`.
+5. Run `npm test`, then `npm run preview` and read the page.
+6. Commit on a branch, open a pull request, review the preview, and merge to `main` to publish.
+
+To take a project down, set `"published": false` and rebuild. Its page, its screenshots and every mention disappear from `docs/`.
+
+**`.private/` is git-ignored and must stay that way.** This repository is public, and the discovery report names private repositories.
+
+**When a private repository becomes public:** `npm run discover` reports it. Add its URL to `PUBLIC_SOURCES` in `scripts/test.mjs` and remove `"sourceIsPublic": false` from the project. The "View source" link then appears. `npm run check:links` confirms it without signing in.
 
 ## Hosting
 

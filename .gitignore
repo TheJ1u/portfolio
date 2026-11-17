@@ -1,2 +1,7 @@
 node_modules/
 .DS_Store
+# Private working area: discovery reports and drafts about unapproved or private projects.
+# This repository is public, so nothing in here may ever be committed.
+.private/
+.claude/
+reports/
