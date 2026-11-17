@@ -14,7 +14,7 @@
   ],
   "skills": [
     { "category": "Languages", "items": [
-      { "name": "Python", "evidence": ["client-inquiry-pipeline", "text-from-sheet"] },
+      { "name": "Python", "evidence": ["client-inquiry-pipeline", "text-from-sheet", "mass-email-sender"] },
       { "name": "JavaScript", "evidence": ["text-from-sheet", "ai-for-life"] },
       { "name": "TypeScript", "evidence": ["jenkinsir"] },
       { "name": "SQL", "evidence": ["client-inquiry-pipeline"] },
@@ -31,12 +31,13 @@
       { "name": "AWS Lambda and API Gateway", "evidence": ["client-inquiry-pipeline"] },
       { "name": "S3 and Athena", "evidence": ["client-inquiry-pipeline"] },
       { "name": "Server-side validation", "evidence": ["client-inquiry-pipeline"] },
-      { "name": "Google Sheets and Apps Script", "evidence": ["jenkinsir"] }
+      { "name": "Google Sheets and Apps Script", "evidence": ["jenkinsir"] },
+      { "name": "Gmail API and OAuth 2.0", "evidence": ["mass-email-sender"] }
     ] },
     { "category": "AI and automation", "items": [
       { "name": "AI-assisted development (Claude Code)", "evidence": ["jenkinsir", "client-inquiry-pipeline", "text-from-sheet"] },
       { "name": "Rule-based assistant design", "evidence": ["jenkinsir"] },
-      { "name": "Automation with safety rules", "evidence": ["text-from-sheet"] },
+      { "name": "Automation with safety rules", "evidence": ["text-from-sheet", "mass-email-sender"] },
       { "name": "Instructions for AI helpers (CLAUDE.md)", "evidence": ["ai-for-life"] }
     ] },
     { "category": "Cloud and delivery", "items": [
@@ -53,6 +54,16 @@
       { "name": "Least-privilege access", "evidence": ["client-inquiry-pipeline"] }
     ] }
   ],
+  "inProgress": {
+    "title": "In progress: AI agents",
+    "status": "Working on it now · test mode only",
+    "body": "Built with Claude Code. They run in test mode: nothing posts or publishes without my approval, and there are no results to report yet. Each gets a full write-up once it has run for real.",
+    "items": [
+      { "name": "3 social media agents", "body": "For science, business-storytelling and history channels. They research a topic, write and fact-check a script, and render a short video. Every number on screen must trace to a source." },
+      { "name": "JenkinsIR website agent", "body": "Manages traffic, SEO and GEO (visibility in AI search) for jenkinsir.com: it notifies Bing of changed pages after each deploy and runs automated SEO checks." },
+      { "name": "AI agent builder", "body": "Reviews my existing agents and proposes new agents to build, queued for my review." }
+    ]
+  },
   "learning": [
     "The Claude API (Building with the Claude API, in progress)",
     "Claude Platform 101 (in progress)",
@@ -70,7 +81,7 @@
       "role": "Insurance Agent",
       "org": "Self-employed",
       "dates": "Sep 2025 – Present",
-      "body": "Licensed in Utah and Wyoming. I explain coverage to clients in plain language and keep up with products and regulations. This work is where my software comes from: jenkinsir.com and the inquiry pipeline both started as problems I met here."
+      "body": "Licensed in Utah and Wyoming. I explain coverage to clients in plain language and keep up with products and regulations. This work is where my software comes from: jenkinsir.com, the inquiry pipeline and the email sender all started as problems I met here."
     },
     {
       "role": "FSY Counselor",

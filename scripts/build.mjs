@@ -90,7 +90,7 @@ function projectCard(p, i) {
   if (p.url) links.push(`<a class="quiet-link" href="${esc(p.url)}">Live site <span aria-hidden="true">↗</span></a>`);
   if (sourceIsPublic(p)) links.push(`<a class="quiet-link" href="${esc(p.source)}">Source <span aria-hidden="true">↗</span></a>`);
   return `<article class="project${p.featured ? ' featured' : ''}" id="${esc(p.id)}" data-reveal>
-<div class="project-shot">${image(p, 1, { sizes: p.featured ? '(min-width: 900px) 640px, 100vw' : '(min-width: 900px) 380px, 100vw', attrs: ` style="view-transition-name:shot-${esc(p.id)}"` })}</div>
+<div class="project-shot">${image(p, 1, { sizes: p.featured ? '(min-width: 900px) 640px, 100vw' : '(min-width: 900px) 560px, 100vw', attrs: ` style="view-transition-name:shot-${esc(p.id)}"` })}</div>
 <div class="project-body">
 <p class="project-meta"><span class="num">${String(i + 1).padStart(2, '0')}</span><span>${esc(p.kind)}</span></p>
 <h3><a class="stretch" href="${page(p)}">${esc(p.title)}</a></h3>
@@ -107,6 +107,18 @@ function skills() {
     const evidence = item.evidence.map(id => { const p = byId(id); if (!p) throw new Error(`skill "${item.name}" cites unknown or unpublished project ${id}`); return `<a href="${page(p)}">${esc(p.short || p.title)}</a>`; }).join(', ');
     return `<li><span class="skill-name">${esc(item.name)}</span><span class="skill-ev">${evidence}</span></li>`;
   }).join('')}</ul></section>`).join('');
+}
+
+// Work that isn't ready for a case study yet: shown as clearly labeled, with no screenshots or numbers.
+function inProgress() {
+  const w = site.inProgress;
+  if (!w) return '';
+  return `<section class="in-progress" id="in-progress" aria-labelledby="in-progress-heading" data-reveal>
+<p class="project-status"><span class="status"><span class="dot" aria-hidden="true"></span>${esc(w.status)}</span></p>
+<h3 id="in-progress-heading">${esc(w.title)}</h3>
+<p class="in-progress-body">${esc(w.body)}</p>
+<ul>${w.items.map(i => `<li><h4>${esc(i.name)}</h4><p>${esc(i.body)}</p></li>`).join('')}</ul>
+</section>`;
 }
 
 const experience = () => site.experience.map(job => `<li><p class="when">${esc(job.dates)}</p><h4>${esc(job.role)}</h4><p class="org">${esc(job.org)}</p><p>${esc(job.body)}</p></li>`).join('');
@@ -150,6 +162,7 @@ const index = fill(readFileSync('template.html', 'utf8'), {
   PROOF: proof(),
   COUNT_WORD: words[projects.length] || String(projects.length),
   PROJECTS: projects.map(projectCard).join('\n'),
+  IN_PROGRESS: inProgress(),
   APPROACH: site.approach.map((s, i) => `<li><span class="step-n" aria-hidden="true">${i + 1}</span><h3>${esc(s.title)}</h3><p>${esc(s.body)}</p></li>`).join(''),
   SKILLS: skills(),
   LEARNING: site.learning.map(s => `<li>${esc(s)}</li>`).join(''),

@@ -202,6 +202,65 @@
     ]
   },
   {
+    "id": "mass-email-sender",
+    "published": true,
+    "title": "Mass Email Sender",
+    "short": "Mass Email Sender",
+    "kind": "Desktop app · Python",
+    "status": "Working app · code private",
+    "summary": "A Windows app that emails a spreadsheet of clients from the agent's own Gmail, one personalized message at a time, with a preview of every recipient before anything sends.",
+    "role": "Built it for a working Medicare agent: gathered what he needed, set the safety rules, and built the app, its background jobs and its installer. Built with AI coding tools.",
+    "why": "An insurance agent needed to email his clients about seminars, birthdays and Open Enrollment. I didn't want to run that through CRM software, so I built a small tool that sends from his own Gmail account, so each client gets what looks like a normal one-to-one email.",
+    "learned": [
+      "Ask for the smallest permission that works. The app can only send mail; it can't read the inbox. That's why the sender address is typed in, not looked up through Google.",
+      "Make the safe path the easy one. The biggest button sends one test email to yourself, and a real send shows the full recipient list and waits for a click.",
+      "Background jobs have no one to ask. Scheduled, birthday and yearly sends never open a sign-in window; if something is wrong they stop, log why and show a Windows notification."
+    ],
+    "approach": "Python with a tkinter window, the Gmail API through OAuth 2.0 with the send-only scope, and openpyxl for Excel or CSV lists. Any spreadsheet column becomes a placeholder. Before a send the app removes duplicates, invalid addresses, the do-not-email list and anyone already emailed in that campaign. It sends one email at a time, 5 to 10 seconds apart, retries temporary Gmail errors, and stops at a daily limit, then resumes where it left off. Windows Task Scheduler runs scheduled, birthday and yearly sends without the app open, and PyInstaller packages it as an .exe.",
+    "demonstrates": "Turning a real person's request into a working desktop tool, using Google's sign-in safely with the narrowest permission, and designing confirmations and logs that prevent emailing the wrong people.",
+    "limit": "There's no automated test suite yet; it was checked by hand and with sandboxed runs. The duplicate and invalid-address checks run only in the main window, not yet in the background jobs. It hasn't been through a full enrollment season. The code is private because it's tied to a real agent's account.",
+    "skills": [
+      "Python",
+      "Gmail API and OAuth 2.0",
+      "Desktop app (tkinter)",
+      "Excel and CSV data",
+      "Windows Task Scheduler",
+      "Risk controls"
+    ],
+    "metrics": [
+      {
+        "value": "1",
+        "label": "Google permission: send only, never read"
+      },
+      {
+        "value": "5–10 s",
+        "label": "between emails, one recipient at a time"
+      },
+      {
+        "value": "3",
+        "label": "automatic jobs: scheduled, birthday, yearly"
+      }
+    ],
+    "flow": [
+      "Client list in Excel or CSV",
+      "Cleaning: duplicates, invalid addresses, do-not-email, already sent",
+      "Preview with the full recipient list",
+      "One email at a time from the agent's own Gmail",
+      "Logged per campaign, so a re-run picks up where it stopped"
+    ],
+    "next": "Move the list cleaning into the shared sending code so the background jobs get it too, then add automated tests.",
+    "slides": [
+      {
+        "alt": "The Mass Email Sender window with a sample business, the sender agent@example.com, a client list called sample_clients.xlsx, and an email using {first_name} and {county} placeholders.",
+        "caption": "One message, personalized from any spreadsheet column (fake data)."
+      },
+      {
+        "alt": "A sample list of eight fake clients with three rows crossed out as do-not-email, invalid and duplicate, next to the 'Confirm real send' preview showing Maria's personalized email and the five remaining recipients.",
+        "caption": "8 rows in, 5 emails out. The preview explains every skipped row."
+      }
+    ]
+  },
+  {
     "id": "ai-for-life",
     "published": true,
     "title": "AI For Life",
