@@ -123,6 +123,7 @@ const person = {
   '@type': 'Person',
   name: site.name,
   url: `${SITE}/`,
+  image: `${SITE}/assets/jordan-jenkins-800.webp`,
   email: `mailto:${site.email}`,
   description: 'Information Systems student (Applied AI emphasis) at Utah Valley University and licensed insurance agent in Utah and Wyoming.',
   affiliation: { '@type': 'CollegeOrUniversity', name: 'Utah Valley University' },
@@ -243,7 +244,7 @@ for (const file of ['style.css', 'app.js']) writeFileSync(`docs/${file}`, readFi
 // Only screenshots of published projects are copied, so an unapproved project's images never reach the site.
 for (const p of projects) p.slides.forEach((_, k) => Object.values(shot(p, k + 1)).forEach(f => copyFileSync(f, `docs/${f}`)));
 for (const f of readdirSync('assets/fonts')) copyFileSync(`assets/fonts/${f}`, `docs/assets/fonts/${f}`);
-for (const f of ['favicon.svg', 'og-image.png', 'Jordan_Jenkins_Resume.pdf']) copyFileSync(`assets/${f}`, `docs/assets/${f}`);
+for (const f of ['favicon.svg', 'og-image.png', 'Jordan_Jenkins_Resume.pdf', 'jordan-jenkins-400.webp', 'jordan-jenkins-800.webp']) copyFileSync(`assets/${f}`, `docs/assets/${f}`);
 writeFileSync('docs/.nojekyll', '');
 writeFileSync('docs/robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
 writeFileSync('docs/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[`${SITE}/`, ...projects.map(p => `${SITE}/${page(p)}`)].map(u => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);

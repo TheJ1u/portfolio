@@ -208,7 +208,12 @@ h2 { font-size: clamp(1.75rem, 3.6vw, 2.75rem); font-weight: 700; letter-spacing
 /* About, experience */
 .about-grid { display: grid; gap: 8px; }
 @media (min-width: 1000px) { .about-grid { grid-template-columns: 5fr 6fr; gap: 64px; } .about-grid .section-head { margin-bottom: 0; } }
-.about-copy { display: grid; gap: 16px; max-width: 62ch; color: var(--muted); font-size: 1.05rem; }
+.about-side { display: grid; gap: 28px; align-content: start; }
+.about-side .section-head { margin-bottom: 0; }
+.portrait { width: 100%; max-width: 220px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 20px; border: 1px solid var(--line); background: #ffffff; box-shadow: var(--shadow); }
+@media (min-width: 1000px) { .portrait { max-width: 320px; } }
+@media (max-width: 999px) { .about-side { margin-bottom: 32px; } }
+.about-copy { align-content: start; display: grid; gap: 16px; max-width: 62ch; color: var(--muted); font-size: 1.05rem; }
 .facts { display: grid; gap: 14px 24px; margin-top: 10px; padding-top: 22px; border-top: 1px solid var(--line); }
 @media (min-width: 640px) { .facts { grid-template-columns: 1fr 1fr; } .facts > div:last-child { grid-column: 1 / -1; } }
 .facts dt { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }

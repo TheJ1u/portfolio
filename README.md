@@ -41,7 +41,10 @@ npm run preview       build, then serve at http://localhost:4173
 npm test              build, then run all checks
 npm run discover      look for new or changed repositories (writes .private/, changes nothing)
 npm run check:links   check every external link over the network
+npm run resume        render resume/resume.html to assets/Jordan_Jenkins_Resume.pdf (needs Chrome or Edge)
 ```
+
+To update the résumé, edit `resume/resume.html`, run `npm run resume`, open the PDF to check it still fits on one page, then run `npm test`.
 
 ## Add a project (approval-based)
 
